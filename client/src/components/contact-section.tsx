@@ -102,47 +102,93 @@ export function ContactSection() {
               transition={{ duration: 0.6 }}
             >
               <Card className="p-8 h-full bg-card/80 backdrop-blur-sm border-border/50">
-                <h3 className="text-2xl font-bold mb-6">Connect with Me</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  I'm always open to discussing new projects, creative ideas, or opportunities 
-                  to be part of your vision. Feel free to reach out through any of the channels 
-                  or connect with me on social platforms.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {socialLinks.map((link) => (
-                    <Button
-                      key={link.label}
-                      variant="outline"
-                      className="gap-2"
-                      asChild
-                    >
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`link-social-${link.label.toLowerCase()}`}
-                      >
-                        <link.icon className="w-4 h-4" />
-                        {link.label}
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </Button>
-                  ))}
-                </div>
-                <div className="mt-8 pt-6 border-t border-border/50">
-                  <Button
-                    size="lg"
-                    className="w-full gap-2"
-                    asChild
-                  >
-                    <a
-                      href="mailto:ayush8000342870@gmail.com"
-                      data-testid="button-send-email"
-                    >
-                      <Mail className="w-4 h-4" />
-                      Send Me an Email
-                    </a>
+                <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+                <form
+                  action="https://formsubmit.co/70ayush@gmail.com"
+                  method="POST"
+                  className="space-y-4"
+                >
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_next" value="https://ayush404.in/" />
+                  <input type="hidden" name="_subject" value="New Submission from Portfolio!" />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-medium">Name</label>
+                      <input
+                        required
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Your Name"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-medium">Email</label>
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="your@email.com"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="text-sm font-medium">Subject</label>
+                    <input
+                      required
+                      type="text"
+                      name="subject"
+                      id="subject"
+                      placeholder="Project Inquiry"
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">Message</label>
+                    <textarea
+                      required
+                      name="message"
+                      id="message"
+                      rows={4}
+                      placeholder="Tell me about your project..."
+                      className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    ></textarea>
+                  </div>
+
+                  <Button type="submit" size="lg" className="w-full gap-2">
+                    <Mail className="w-4 h-4" />
+                    Send Message
                   </Button>
+                </form>
+
+                <div className="mt-8 pt-6 border-t border-border/50">
+                  <p className="text-sm text-center text-muted-foreground mb-4">Or connect on social</p>
+                  <div className="flex justify-center gap-3">
+                    {socialLinks.map((link) => (
+                      <Button
+                        key={link.label}
+                        size="sm"
+                        variant="ghost"
+                        className="gap-2"
+                        asChild
+                      >
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <link.icon className="w-4 h-4" />
+                          {link.label}
+                        </a>
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               </Card>
             </motion.div>

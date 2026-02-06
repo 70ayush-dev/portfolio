@@ -64,7 +64,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            Building scalable enterprise CMS solutions, custom extensions, and 
+            Building scalable enterprise CMS solutions, custom extensions, and
             AI-powered automation systems with 2+ years of experience
           </motion.p>
 
@@ -87,6 +87,17 @@ export function HeroSection() {
             <Button
               size="lg"
               className="gap-2 rounded-full px-8"
+              asChild
+            >
+              <a href="/resume.pdf" download="Ayush_Singh_Resume.pdf">
+                <ArrowDown className="w-4 h-4" />
+                Download Resume
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="gap-2 rounded-full px-8"
               onClick={() => {
                 const element = document.querySelector("#contact");
                 if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -98,7 +109,7 @@ export function HeroSection() {
             </Button>
             <Button
               size="lg"
-              variant="outline"
+              variant="ghost"
               className="gap-2 rounded-full px-8"
               asChild
             >

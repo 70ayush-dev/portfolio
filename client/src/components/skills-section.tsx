@@ -2,43 +2,79 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Code, Database, Globe, Wrench, Cloud, Bot } from "lucide-react";
+import {
+  SiPhp, SiTypo3, SiLaravel, SiDrupal, SiShopify, SiMysql,
+  SiGit, SiGooglecloud, SiOpenai, SiPrestashop, SiJoomla,
+  SiHtml5
+} from "react-icons/si";
 
 const skillCategories = [
   {
     title: "Languages & Frameworks",
     icon: Code,
     color: "from-violet-500 to-purple-500",
-    skills: ["PHP", "TYPO3 (v11–v13)", "Laravel", "Drupal", "Extbase", "Fluid"],
+    skills: [
+      { name: "PHP", icon: SiPhp },
+      { name: "TYPO3 (v11–v13)", icon: SiTypo3 },
+      { name: "Laravel", icon: SiLaravel },
+      { name: "Drupal", icon: SiDrupal },
+      { name: "Extbase", icon: SiTypo3 },
+      { name: "Fluid", icon: SiHtml5 }
+    ],
   },
   {
     title: "CMS & Platforms",
     icon: Globe,
     color: "from-blue-500 to-cyan-500",
-    skills: ["TYPO3 Extensions", "Backend Modules", "TCA", "Joomla", "PrestaShop", "Shopify"],
+    skills: [
+      { name: "TYPO3 Extensions", icon: SiTypo3 },
+      { name: "Joomla", icon: SiJoomla },
+      { name: "PrestaShop", icon: SiPrestashop },
+      { name: "Shopify", icon: SiShopify }
+    ],
   },
   {
     title: "APIs & Integration",
     icon: Cloud,
     color: "from-emerald-500 to-teal-500",
-    skills: ["REST APIs", "OpenAI GPT", "Google Cloud Storage", "Pusher", "Nylas", "Chatwoot", "Geolocation"],
+    skills: [
+      { name: "REST APIs", icon: Cloud },
+      { name: "OpenAI GPT", icon: SiOpenai },
+      { name: "Google Cloud", icon: SiGooglecloud },
+      { name: "Nylas", icon: Cloud },
+      { name: "Chatwoot", icon: Bot },
+      { name: "Geolocation", icon: Globe }
+    ],
   },
   {
     title: "Database",
     icon: Database,
     color: "from-orange-500 to-amber-500",
-    skills: ["MySQL", "Query Optimization", "Performance Tuning", "Large-scale Data Processing"],
+    skills: [
+      { name: "MySQL", icon: SiMysql },
+      { name: "Query Optimization", icon: Database },
+      { name: "Big Data Processing", icon: Database }
+    ],
   },
   {
     title: "Tools & DevOps",
     icon: Wrench,
     color: "from-rose-500 to-pink-500",
-    skills: ["Git", "Scheduler Tasks", "Cloud Storage", "Email Automation"],
+    skills: [
+      { name: "Git", icon: SiGit },
+      { name: "Cloud Storage", icon: Cloud },
+      { name: "Email Automation", icon: Wrench }
+    ],
   },
   {
     title: "AI & Automation",
     icon: Bot,
     color: "from-indigo-500 to-violet-500",
-    skills: ["AI-Powered Workflows", "OpenAI GPT Integration", "CRM Automation", "Content Generation"],
+    skills: [
+      { name: "AI Workflows", icon: SiOpenai },
+      { name: "GPT Integration", icon: SiOpenai },
+      { name: "CRM Automation", icon: Bot }
+    ],
   },
 ];
 
@@ -46,7 +82,7 @@ export function SkillsSection() {
   return (
     <section id="skills" className="py-24 bg-muted/30 relative">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -85,11 +121,12 @@ export function SkillsSection() {
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <Badge
-                      key={skill}
+                      key={skill.name}
                       variant="secondary"
-                      className="text-xs font-medium"
+                      className="text-xs font-medium gap-1.5 py-1"
                     >
-                      {skill}
+                      <skill.icon className="w-3.5 h-3.5" />
+                      {skill.name}
                     </Badge>
                   ))}
                 </div>
