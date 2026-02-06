@@ -59,7 +59,7 @@ export function Footer() {
               <Code2 className="w-4 h-4 text-primary" />
               <span>&copy; 2026 Ayush Singh. All rights reserved.</span>
             </div>
-            <p className="text-xs opacity-70">Designed by You</p>
+            <p className="text-xs opacity-70">Designed by Ayush Singh</p>
           </div>
         </motion.div>
       </div>
