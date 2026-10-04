@@ -503,6 +503,18 @@ svg {
   font-size: var(--text-label);
   color: var(--color-ink-secondary);
 }
+.screenshot-visual {
+  padding: 0;
+}
+.screenshot-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.screenshot-visual figcaption {
+  margin: 0;
+  padding: 14px 20px;
+}
 .featured-visual {
   background: var(--color-accent);
   color: var(--color-on-accent);
@@ -1014,7 +1026,7 @@ svg {
 .case-study > .project-visual .project-flow li {
   width: 100%;
 }
-.case-study > .project-visual:not(.featured-visual) {
+.case-study > .project-visual:not(.featured-visual):not(.screenshot-visual) {
   display: none;
 }
 .case-study > .featured-visual {

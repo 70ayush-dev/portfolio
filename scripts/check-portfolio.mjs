@@ -187,13 +187,18 @@ try {
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
   const robots = await readFile("dist/robots.txt", "utf8");
   assert.match(robots, /Sitemap: https:\/\/ayush404\.in\/sitemap\.xml/);
-  const pageLinks = [...llms.matchAll(/\]\((https:\/\/ayush404\.in\/[^)]*)\)/g)]
-    .map((match) => match[1]);
+  const pageLinks = [
+    ...llms.matchAll(/\]\((https:\/\/ayush404\.in\/[^)]*)\)/g),
+  ].map((match) => match[1]);
   assert.ok(pageLinks.length >= 6);
   for (const url of pageLinks) {
     const path = new URL(url).pathname;
-    const output = path === "/" ? "dist/index.html"
-      : path.endsWith("/") ? `dist${path}index.html` : `dist${path}`;
+    const output =
+      path === "/"
+        ? "dist/index.html"
+        : path.endsWith("/")
+          ? `dist${path}index.html`
+          : `dist${path}`;
     await readFile(output);
     if (path.endsWith("/")) assert.ok(sitemap.includes(url.split("#")[0]));
   }
@@ -212,10 +217,19 @@ try {
   assert.equal(person.jobTitle, "Web Platform Engineer");
   for (const skill of ["Technical SEO", "AEO", "GEO"])
     assert.ok(person.knowsAbout.includes(skill));
+  for (const skill of [
+    "Laravel",
+    "Shopify",
+    "PrestaShop",
+    "Joomla",
+    "WordPress",
+  ])
+    assert.ok(person.knowsAbout.includes(skill));
   assert.ok(schema["@graph"].some((item) => item["@type"] === "WebPage"));
   assert.ok(home.indexOf('id="engineering"') < home.indexOf('id="search"'));
   assert.ok(home.indexOf('id="search"') < home.indexOf('id="lab"'));
   for (const slug of [
+    "fit-with-nishika",
     "der-autoputzer",
     "typo3-ai-chatbot",
     "migration-assistant",
@@ -228,6 +242,47 @@ try {
     assert.match(html, /BreadcrumbList/);
     assert.match(html, /Implementation &amp; engineering decisions/);
   }
+  const nishika = await readFile(
+    "dist/work/fit-with-nishika/index.html",
+    "utf8",
+  );
+  assert.match(nishika, /https:\/\/fitwithnishika\.com\//);
+  assert.match(nishika, /My role/);
+  assert.match(nishika, /Custom content management/);
+  assert.match(nishika, /Search &amp; AI Architecture/);
+  assert.match(nishika, /projects\/fit-with-nishika\.jpg/);
+  await page.goto(base + "/work/fit-with-nishika/", {
+    waitUntil: "domcontentloaded",
+  });
+  assert.equal(
+    await page.getByRole("heading", { level: 1 }).textContent(),
+    "Fit with Nishika.",
+  );
+  assert.equal(
+    await page
+      .getByRole("link", { name: "Visit live website" })
+      .getAttribute("href"),
+    "https://fitwithnishika.com/",
+  );
+  await page.waitForFunction(() => {
+    const image = document.querySelector(".screenshot-visual img");
+    return image?.complete && image.naturalWidth > 0;
+  });
+  await page.screenshot({
+    path: ".impeccable/review/fit-with-nishika.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth > innerWidth,
+    ),
+    false,
+  );
+  await page.screenshot({
+    path: ".impeccable/review/fit-with-nishika-mobile.png",
+    fullPage: true,
+  });
   console.log(
     "Passed: desktop/mobile overflow, menu, system map, case-study navigation, FAQ, reduced motion, 404, theme switching/persistence, keyboard diagram navigation, narrow-screen reflow, JavaScript-disabled content, browser errors and static SEO pages.",
   );

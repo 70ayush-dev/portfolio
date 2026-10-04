@@ -115,7 +115,10 @@ export default function Portfolio() {
           <div className="project-grid">
             {projects.map((p, i) => (
               <article className={`project project-${i}`} key={p.slug}>
-                <ProjectVisual project={p} featured={i === 0} />
+                <ProjectVisual
+                  project={p}
+                  featured={p.slug === "der-autoputzer"}
+                />
                 <div className="project-copy">
                   <BitsText as="h3">
                     <a href={`/work/${p.slug}/`}>{p.title}</a>
@@ -133,6 +136,11 @@ export default function Portfolio() {
                   >
                     Explore case study <Arrow />
                   </BitsControl>
+                  {p.liveUrl && (
+                    <BitsControl as="a" className="text-link" href={p.liveUrl}>
+                      Visit live website <Arrow />
+                    </BitsControl>
+                  )}
                 </div>
               </article>
             ))}
@@ -225,8 +233,9 @@ export default function Portfolio() {
           <div className="about-copy">
             <p>
               I’m Ayush Singh, a web engineer focused on building modern
-              platforms around TYPO3 and PHP while working across modern
-              frontend development, SEO, AEO, GEO, AI and developer automation.
+              platforms across CMS, commerce and custom applications while
+              working across modern frontend development, SEO, AEO, GEO, AI and
+              developer automation.
             </p>
             <p>
               My work sits between backend architecture and frontend experience.
@@ -234,10 +243,11 @@ export default function Portfolio() {
               simpler, reusable systems.
             </p>
             <p>
-              I work extensively with TYPO3 and PHP while building modern
-              interfaces with Vue, Nuxt and Tailwind. More recently, I’m
-              exploring practical applications of AI, RAG and automation to
-              improve CMS workflows and development processes.
+              I work extensively with TYPO3 and PHP, with experience in Laravel,
+              WordPress, Joomla, Shopify and PrestaShop. I build modern
+              interfaces with Vue, Nuxt, React, Next.js and Tailwind. More
+              recently, I’m exploring practical applications of AI, RAG and
+              automation to improve CMS workflows and development processes.
             </p>
             <div className="about-links">
               <BitsControl as="a" className="text-link" href="#search">

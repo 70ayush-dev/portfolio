@@ -18,6 +18,10 @@ export interface Project {
   result: string;
   status?: string;
   searchArchitecture?: string;
+  liveUrl?: string;
+  image?: string;
+  role?: string;
+  decisions?: { title: string; description: string }[];
 }
 export const projects: Project[] = [
   {
@@ -36,6 +40,67 @@ export const projects: Project[] = [
       "Create reusable TYPO3 content structures and map them to reusable Nuxt components across seminar pages, reviews, pricing and responsive layouts.",
     result:
       "A modern frontend architecture with reusable content components and a stronger foundation for future development.",
+  },
+  {
+    slug: "fit-with-nishika",
+    title: "Fit with Nishika",
+    subtitle: "End-to-end practitioner website & content platform",
+    description:
+      "A live platform for an Ottawa-based physiotherapist and personal trainer, connecting clear service journeys, movement resources and an interactive educational check-in with a custom admin CMS.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Firebase",
+      "Brevo",
+      "React Bits",
+      "SEO",
+    ],
+    liveUrl: "https://fitwithnishika.com/",
+    image: "/projects/fit-with-nishika.jpg",
+    role: "End-to-end design and development — public website, admin CMS, backend APIs, integrations and search architecture.",
+    flow: [
+      "Next.js / React",
+      "Server APIs",
+      "Firebase Auth / Firestore",
+      "Admin CMS",
+      "Published content",
+    ],
+    challenge:
+      "Create a coherent web presence for two distinct services: clinical physiotherapy through the clinic and personal training through a separate enquiry journey. Make educational resources easy to discover and give the practitioner tools to maintain the site.",
+    approach:
+      "Built the platform in Next.js, React and TypeScript, with responsive interfaces and React Bits interactions. Connected a custom admin CMS to Firebase Authentication and Firestore through server APIs. Implemented enquiry and guide workflows, content publishing and configurable email integration.",
+    decisions: [
+      {
+        title: "Distinct service journeys",
+        description:
+          "Separate clinical booking links from personal-training enquiries, with dedicated service pages and clear next steps.",
+      },
+      {
+        title: "Custom content management",
+        description:
+          "Authenticated admin editors manage resources, services, training offers, guide settings and media. Server-side content filtering and sanitization govern what reaches public pages.",
+      },
+      {
+        title: "Educational check-in",
+        description:
+          "Built a multi-step Body Pattern Check with a direct PDF download and optional email delivery. The guide is educational and shared, rather than presented as a diagnosis or personalized treatment plan.",
+      },
+      {
+        title: "Backend & email workflows",
+        description:
+          "Implemented server routes for enquiries, submissions and subscribers, with separate marketing consent and unsubscribe handling. Brevo integration supports email delivery and admin delivery statistics; actual sending depends on configuration.",
+      },
+      {
+        title: "Interactive frontend",
+        description:
+          "Built responsive service and resource interfaces with React Bits components, GSAP and motion effects, including an interactive practitioner badge.",
+      },
+    ],
+    searchArchitecture:
+      "Implemented page-specific metadata, canonical URLs and social previews; JSON-LD for the practitioner, website, services, articles, breadcrumbs and visible FAQs; resource URLs and a dynamic XML sitemap; and robots directives. Consistent practitioner identity, author information, clear service relationships and question-based content give search and answer systems explicit context. These are implemented foundations for SEO, AEO and GEO, without claimed ranking or AI-citation gains.",
+    result:
+      "Launched a complete public website with service-specific journeys, an educational resource library and a guided check-in, supported by a custom admin CMS and backend workflows. The case study documents delivered functionality; traffic, conversion and search-visibility improvements have not been measured here.",
   },
   {
     slug: "typo3-ai-chatbot",
@@ -189,13 +254,18 @@ export const searchServices = [
 export const capabilities = [
   {
     title: "CMS Engineering",
-    text: "TYPO3 extensions, Content Blocks, Fluid, migrations, upgrade wizards, backend modules and custom CMS functionality.",
-    tags: ["TYPO3", "PHP", "Fluid", "Composer"],
+    text: "CMS development across TYPO3, WordPress and Joomla, with deeper TYPO3 work in extensions, Content Blocks, Fluid, migrations and backend modules.",
+    tags: ["TYPO3", "WordPress", "Joomla", "PHP"],
   },
   {
     title: "Full-Stack Platforms",
     text: "Modern web applications connecting robust backend systems with modern frontend experiences.",
-    tags: ["PHP", "Vue", "Nuxt", "REST APIs", "SQL"],
+    tags: ["PHP", "Laravel", "Vue", "Nuxt", "Next.js", "React", "REST APIs"],
+  },
+  {
+    title: "E-commerce Platforms",
+    text: "Web development experience with Shopify and PrestaShop, alongside broader CMS and full-stack engineering.",
+    tags: ["Shopify", "PrestaShop"],
   },
   {
     title: "AI & Automation",
@@ -205,7 +275,7 @@ export const capabilities = [
   {
     title: "UI Engineering",
     text: "Turning designs into responsive, reusable and production-ready interfaces.",
-    tags: ["Vue", "Nuxt", "Tailwind", "CSS", "GSAP"],
+    tags: ["Vue", "Nuxt", "React", "Next.js", "Tailwind", "GSAP"],
   },
   {
     title: "Search & AI Visibility",
@@ -224,8 +294,13 @@ export const capabilities = [
   },
 ];
 export const stack = [
-  ["Backend", "PHP · TYPO3 · Fluid · Composer · MySQL · REST APIs"],
-  ["Frontend", "Vue · Nuxt · JavaScript · Tailwind · HTML · CSS · GSAP"],
+  ["Backend", "PHP · Laravel · Fluid · Composer · MySQL · REST APIs"],
+  ["CMS & Commerce", "TYPO3 · WordPress · Joomla · Shopify · PrestaShop"],
+  [
+    "Frontend",
+    "Vue · Nuxt · React · Next.js · TypeScript · JavaScript · Tailwind · HTML · CSS · GSAP",
+  ],
+  ["Platform Services", "Firebase Authentication · Firestore · Brevo"],
   [
     "Infrastructure",
     "Docker · DDEV · Git · Linux · Cloudflare · DigitalOcean · Plesk",
@@ -307,7 +382,7 @@ export const faqs = [
   ],
   [
     "Which technologies does Ayush use?",
-    "His core technologies include PHP, TYPO3, Vue, Nuxt, JavaScript and Tailwind, alongside SQL, REST APIs, Docker, DDEV, SEO, AEO, GEO and AI integrations.",
+    "Ayush works with PHP, TYPO3, Laravel, WordPress, Joomla, Shopify and PrestaShop, alongside Vue, Nuxt, React, Next.js, TypeScript and Tailwind. His platform work also includes Firebase, REST APIs, SEO, AEO, GEO and AI integrations.",
   ],
   [
     "What TYPO3 experience does Ayush have?",
@@ -315,7 +390,7 @@ export const faqs = [
   ],
   [
     "What projects has Ayush worked on?",
-    "Selected work includes Der Autoputzer, a TYPO3 AI Chatbot, a TYPO3 Migration Assistant experiment, a TYPO3 CRM System and a reusable Content Block System.",
+    "Selected work includes Fit with Nishika, an end-to-end Next.js and Firebase platform; Der Autoputzer; a TYPO3 AI Chatbot; a TYPO3 Migration Assistant experiment; a TYPO3 CRM System; and a reusable Content Block System.",
   ],
   [
     "What AI work is Ayush exploring?",

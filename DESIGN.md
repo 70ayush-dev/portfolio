@@ -122,7 +122,7 @@ Implemented system extracted from `client/src/index.css` and the shipped React c
 
 Engineering Fieldnotes is the implemented portfolio identity: considered typography, open editorial rows, quiet surfaces and concise technical annotations. Warm paper and deep ink establish a calm reading surface; cobalt identifies actions and connected architecture. The authorized dark theme preserves those relationships on a pure black canvas.
 
-The signature pairs an oversized statement with an unboxed architecture annotation. Project stories explain real systems through labeled vector diagrams and readable prose. The hero remains a plain surface, without a moving background.
+The signature pairs an oversized statement with an unboxed architecture annotation. Project stories explain real systems through labeled vector diagrams and readable prose. Fit with Nishika additionally uses a real public homepage screenshot, captioned as a live website, with a direct site link. The hero remains a plain surface, without a moving background.
 
 **Key Characteristics:**
 - Open editorial rows and generous margins.

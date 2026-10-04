@@ -14,6 +14,21 @@ export default function ProjectVisual({
   project: Project;
   featured?: boolean;
 }) {
+  if (project.image) {
+    return (
+      <figure className="project-visual screenshot-visual">
+        <img
+          src={project.image}
+          alt="Fit with Nishika homepage showing physiotherapy and movement coaching with the interactive practitioner badge"
+          width={1440}
+          height={1000}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>Live website · {project.title}</figcaption>
+      </figure>
+    );
+  }
   return (
     <figure
       className={`project-visual ${featured ? "featured-visual" : ""}`}

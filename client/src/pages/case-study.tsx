@@ -31,6 +31,11 @@ export default function CaseStudy({ slug }: { slug: string }) {
           <span className="experiment-status">{project.status}</span>
         )}
         <Tags values={project.technologies} />
+        {project.liveUrl && (
+          <BitsControl as="a" className="text-link" href={project.liveUrl}>
+            Visit live website <Arrow />
+          </BitsControl>
+        )}
         <ProjectVisual
           project={project}
           featured={project.slug === "der-autoputzer"}
@@ -43,6 +48,12 @@ export default function CaseStudy({ slug }: { slug: string }) {
           <BitsText as="h2">Challenge</BitsText>
           <BitsText as="p">{project.challenge}</BitsText>
         </AnimatedSection>
+        {project.role && (
+          <AnimatedSection className="case-section">
+            <BitsText as="h2">My role</BitsText>
+            <BitsText as="p">{project.role}</BitsText>
+          </AnimatedSection>
+        )}
         <AnimatedSection className="case-section">
           <BitsText as="h2">Architecture</BitsText>
           <ol className="case-flow">
@@ -55,6 +66,12 @@ export default function CaseStudy({ slug }: { slug: string }) {
           <BitsText as="h2">Implementation & engineering decisions</BitsText>
           <BitsText as="p">{project.approach}</BitsText>
         </AnimatedSection>
+        {project.decisions?.map((decision) => (
+          <AnimatedSection key={decision.title} className="case-section">
+            <BitsText as="h2">{decision.title}</BitsText>
+            <BitsText as="p">{decision.description}</BitsText>
+          </AnimatedSection>
+        ))}
         <AnimatedSection className="case-section">
           <BitsText as="h2">
             {project.status ? "Direction of the experiment" : "Result"}
@@ -68,7 +85,10 @@ export default function CaseStudy({ slug }: { slug: string }) {
               <BitsText as="p">{project.searchArchitecture}</BitsText>
               <div className="case-capability-links">
                 <BitsControl as="a" className="text-link" href="/#engineering">
-                  TYPO3, Content Blocks & Nuxt <Arrow />
+                  {project.slug === "fit-with-nishika"
+                    ? "Full-stack platform engineering"
+                    : "TYPO3, Content Blocks & Nuxt"}{" "}
+                  <Arrow />
                 </BitsControl>
                 <BitsControl as="a" className="text-link" href="/#search">
                   SEO · AEO · GEO capabilities <Arrow />

@@ -16,7 +16,7 @@ Make Ayush Singh's platform engineering work understandable, provide factual pro
 
 ## Positioning
 
-Ayush Singh — Web Platform Engineer. Capabilities span TYPO3, PHP, Vue/Nuxt, frontend delivery, technical SEO, AEO, GEO, AI integrations and automation. Search visibility is considered alongside the CMS, backend and frontend architecture.
+Ayush Singh — Web Platform Engineer. Capabilities span TYPO3, PHP, Laravel, WordPress, Joomla, Shopify, PrestaShop, Vue/Nuxt, React/Next.js, frontend delivery, technical SEO, AEO, GEO, AI integrations and automation. TYPO3 remains a specialization within broader platform experience. Search visibility is considered alongside the CMS, backend and frontend architecture. Fit with Nishika demonstrates end-to-end Next.js, TypeScript and Firebase platform delivery.
 
 ## Capabilities and Constraints
 

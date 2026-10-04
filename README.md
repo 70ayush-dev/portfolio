@@ -5,11 +5,11 @@ React, TypeScript and Vite portfolio based on `ayush404-portfolio-v2.md`. Engine
 - `npm install`: install dependencies.
 - `npm run dev`: local development.
 - `npm run check`: TypeScript validation.
-- `npm run build`: build and prerender the homepage, five case studies and a 404 page into `dist/`.
+- `npm run build`: build and prerender the homepage, six case studies and a 404 page into `dist/`.
 - `npm run preview`: preview the production build.
 - `node scripts/check-portfolio.mjs`: browser and static-content checks (requires Chrome at `/usr/bin/google-chrome`; set `PORTFOLIO_TEST_URL` to test a preview server).
 
-Project content, contact links, technologies, experiments and FAQs live in `client/src/data/portfolio.ts`. No project metrics are invented. Lab entries are explicitly presented as experiments. Project visuals illustrate architecture rather than claiming to be screenshots.
+Project content, contact links, technologies, experiments and FAQs live in `client/src/data/portfolio.ts`. No project metrics are invented. Lab entries are explicitly presented as experiments. Fit with Nishika uses a captured public homepage screenshot and documents end-to-end Next.js/React/TypeScript and Firebase work, verified against the project repository. Other project visuals illustrate architecture. CMS and commerce capabilities include TYPO3, WordPress, Joomla, Shopify and PrestaShop, with Laravel in backend skills.
 
 The build generates page-specific titles, descriptions, canonical URLs, social metadata, Person / WebSite / WebPage / BreadcrumbList / CreativeWork structured data, visible FAQs with matching FAQPage data, and a sitemap. It also generates `/llms.txt` as Markdown with an H1, a concise overview and links to real portfolio pages. Static HTML makes content available without JavaScript; React hydrates the interactions. `/robots.txt` allows crawling and links to `/sitemap.xml`. The llms overview does not set crawling or training permissions. This supports search and AI discovery but does not guarantee rankings or AI citations.
 
