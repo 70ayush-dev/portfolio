@@ -137,6 +137,32 @@ await writeFile(
     .map((r) => `<url><loc>${identity.url + r}</loc></url>`)
     .join("")}</urlset>`,
 );
+await writeFile(
+  "dist/llms.txt",
+  `# Ayush Singh — Web Platform Engineer
+
+> Ayush Singh builds modern web platforms, CMS architectures and search-ready, AI-visible digital experiences around TYPO3, PHP, Vue/Nuxt, SEO, AEO, GEO, AI integrations and automation.
+
+This is Ayush's professional portfolio. Project pages describe engineering work and distinguish implemented work from considerations or experiments. Search and AI visibility are architectural capabilities; no rankings, traffic gains or AI citations are guaranteed.
+
+## Portfolio
+
+- [Homepage](${identity.url}/): Professional identity, capabilities, selected work and contact information.
+- [Engineering](${identity.url}/#engineering): Technical skills and platform engineering expertise.
+- [Search & AI Visibility](${identity.url}/#search): Technical SEO, AEO and GEO capabilities and services.
+
+## Case studies
+
+${projects.map((p) => `- [${p.title}](${identity.url}/work/${p.slug}/): ${p.description.replaceAll("\n", " ")}`).join("\n")}
+
+## Discovery
+
+- [XML sitemap](${identity.url}/sitemap.xml): Canonical, indexable portfolio pages.
+- [Robots directives](${identity.url}/robots.txt): Crawler access directives.
+
+This file provides a curated site overview. It does not set crawling permissions or training policies.
+`,
+);
 console.log(
   `Prerendered ${routes.length} pages with route metadata and structured data.`,
 );

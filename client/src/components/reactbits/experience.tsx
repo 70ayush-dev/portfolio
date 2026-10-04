@@ -1,5 +1,6 @@
-// Adapted from React Bits BlurText, AnimatedContent and Magnet.
+// Adaptations of React Bits BlurText, AnimatedContent and Magnet behaviors.
 // https://github.com/DavidHDev/react-bits — see LICENSE.md.
+// Native semantic elements stay readable in server-rendered and reduced-motion states.
 import {
   createElement,
   useEffect,
@@ -16,42 +17,32 @@ export function BitsText({ as, children, ...props }: TextProps) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    // Body text is intentionally settled. The hero is the authored reveal.
+    if (!el || as !== "h1") return;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let animation: gsap.core.Tween | undefined;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || media.matches) return;
-        observer.disconnect();
-        // Animate from the readable server-rendered state only when visible.
-        animation = gsap.fromTo(
-          el,
-          { filter: "blur(4px)", y: 8 },
-          {
-            filter: "blur(0px)",
-            y: 0,
-            duration: 0.65,
-            ease: "power2.out",
-            clearProps: "filter,transform",
-          },
-        );
+    if (media.matches) return;
+    const animation = gsap.fromTo(
+      el,
+      { filter: "blur(3px)" },
+      {
+        filter: "blur(0px)",
+        duration: 0.6,
+        ease: "expo.out",
+        clearProps: "filter",
       },
-      { threshold: 0.08 },
     );
-    observer.observe(el);
     const stop = () => {
       if (media.matches) {
-        animation?.kill();
-        gsap.set(el, { clearProps: "filter,transform" });
+        animation.kill();
+        gsap.set(el, { clearProps: "filter" });
       }
     };
     media.addEventListener("change", stop);
     return () => {
-      observer.disconnect();
       media.removeEventListener("change", stop);
-      animation?.kill();
+      animation.kill();
     };
-  }, []);
+  }, [as]);
   return createElement(
     as,
     { ...props, ref, "data-reactbits": "BlurText" },
@@ -60,40 +51,32 @@ export function BitsText({ as, children, ...props }: TextProps) {
 }
 export function AnimatedSection({
   children,
+  motion = "settled",
   ...props
-}: HTMLAttributes<HTMLElement>) {
+}: HTMLAttributes<HTMLElement> & { motion?: "intro" | "settled" }) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || motion !== "intro") return;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let animation: gsap.core.Tween | undefined;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || media.matches) return;
-        observer.disconnect();
-        animation = gsap.fromTo(
-          el,
-          { y: 20 },
-          { y: 0, duration: 0.8, ease: "power3.out", clearProps: "transform" },
-        );
-      },
-      { threshold: 0.02 },
+    if (media.matches) return;
+    const animation = gsap.fromTo(
+      el,
+      { y: 12 },
+      { y: 0, duration: 0.65, ease: "expo.out", clearProps: "transform" },
     );
-    observer.observe(el);
     const stop = () => {
       if (media.matches) {
-        animation?.kill();
+        animation.kill();
         gsap.set(el, { clearProps: "transform" });
       }
     };
     media.addEventListener("change", stop);
     return () => {
-      observer.disconnect();
       media.removeEventListener("change", stop);
-      animation?.kill();
+      animation.kill();
     };
-  }, []);
+  }, [motion]);
   return createElement(
     "section",
     { ...props, ref, "data-reactbits": "AnimatedContent" },
@@ -109,27 +92,27 @@ export function BitsControl({ as, children, ...props }: ControlProps) {
     if (!el) return;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animation: gsap.core.Tween | undefined;
-    function reset() {
+    const reset = () => {
       animation?.kill();
-      if (el) gsap.set(el, { clearProps: "transform" });
-    }
-    function move(event: PointerEvent) {
-      if (!el || media.matches || event.pointerType !== "mouse") return;
-      const rect = el.getBoundingClientRect();
+      gsap.set(el, { clearProps: "transform" });
+    };
+    const move = (event: PointerEvent) => {
+      if (media.matches || event.pointerType !== "mouse") return;
+      const box = el.getBoundingClientRect();
       animation?.kill();
       animation = gsap.to(el, {
         x: Math.max(
           -3,
-          Math.min(3, (event.clientX - rect.left - rect.width / 2) / 12),
+          Math.min(3, (event.clientX - box.left - box.width / 2) / 16),
         ),
         y: Math.max(
           -3,
-          Math.min(3, (event.clientY - rect.top - rect.height / 2) / 12),
+          Math.min(3, (event.clientY - box.top - box.height / 2) / 16),
         ),
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.2,
+        ease: "expo.out",
       });
-    }
+    };
     el.addEventListener("pointermove", move);
     el.addEventListener("pointerleave", reset);
     el.addEventListener("blur", reset);

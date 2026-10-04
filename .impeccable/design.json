@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T17:54:14.864139+00:00",
+  "title": "Design System: AYUSH404",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "canonical": "#f7f5ef",
+        "tonalRamp": [
+          "oklch(15% 0.0082 91.48)",
+          "oklch(27% 0.0082 91.48)",
+          "oklch(38% 0.0082 91.48)",
+          "oklch(50% 0.0082 91.48)",
+          "oklch(61% 0.0082 91.48)",
+          "oklch(73% 0.0082 91.48)",
+          "oklch(84% 0.0082 91.48)",
+          "oklch(95% 0.0082 91.48)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(27% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(50% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(73% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "surface-soft": {
+        "role": "neutral",
+        "displayName": "Surface Soft",
+        "canonical": "#eeebe3",
+        "tonalRamp": [
+          "oklch(15% 0.0112 89.72)",
+          "oklch(27% 0.0112 89.72)",
+          "oklch(38% 0.0112 89.72)",
+          "oklch(50% 0.0112 89.72)",
+          "oklch(61% 0.0112 89.72)",
+          "oklch(73% 0.0112 89.72)",
+          "oklch(84% 0.0112 89.72)",
+          "oklch(95% 0.0112 89.72)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#172126",
+        "tonalRamp": [
+          "oklch(15% 0.0172 229.97)",
+          "oklch(27% 0.0172 229.97)",
+          "oklch(38% 0.0172 229.97)",
+          "oklch(50% 0.0172 229.97)",
+          "oklch(61% 0.0172 229.97)",
+          "oklch(73% 0.0172 229.97)",
+          "oklch(84% 0.0172 229.97)",
+          "oklch(95% 0.0172 229.97)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Ink Secondary",
+        "canonical": "#4c585d",
+        "tonalRamp": [
+          "oklch(15% 0.0171 224.81)",
+          "oklch(27% 0.0171 224.81)",
+          "oklch(38% 0.0171 224.81)",
+          "oklch(50% 0.0171 224.81)",
+          "oklch(61% 0.0171 224.81)",
+          "oklch(73% 0.0171 224.81)",
+          "oklch(84% 0.0171 224.81)",
+          "oklch(95% 0.0171 224.81)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "canonical": "#2349c6",
+        "tonalRamp": [
+          "oklch(15% 0.1989 265.65)",
+          "oklch(27% 0.1989 265.65)",
+          "oklch(38% 0.1989 265.65)",
+          "oklch(50% 0.1989 265.65)",
+          "oklch(61% 0.1989 265.65)",
+          "oklch(73% 0.1989 265.65)",
+          "oklch(84% 0.1989 265.65)",
+          "oklch(95% 0.1989 265.65)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Accent Hover",
+        "canonical": "#19389b",
+        "tonalRamp": [
+          "oklch(15% 0.1652 265.50)",
+          "oklch(27% 0.1652 265.50)",
+          "oklch(38% 0.1652 265.50)",
+          "oklch(50% 0.1652 265.50)",
+          "oklch(61% 0.1652 265.50)",
+          "oklch(73% 0.1652 265.50)",
+          "oklch(84% 0.1652 265.50)",
+          "oklch(95% 0.1652 265.50)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Accent Soft",
+        "canonical": "#e9eeff",
+        "tonalRamp": [
+          "oklch(15% 0.0235 272.82)",
+          "oklch(27% 0.0235 272.82)",
+          "oklch(38% 0.0235 272.82)",
+          "oklch(50% 0.0235 272.82)",
+          "oklch(61% 0.0235 272.82)",
+          "oklch(73% 0.0235 272.82)",
+          "oklch(84% 0.0235 272.82)",
+          "oklch(95% 0.0235 272.82)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "#d5d8d3",
+        "tonalRamp": [
+          "oklch(15% 0.0075 132.42)",
+          "oklch(27% 0.0075 132.42)",
+          "oklch(38% 0.0075 132.42)",
+          "oklch(50% 0.0075 132.42)",
+          "oklch(61% 0.0075 132.42)",
+          "oklch(73% 0.0075 132.42)",
+          "oklch(84% 0.0075 132.42)",
+          "oklch(95% 0.0075 132.42)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "border-control": {
+        "role": "neutral",
+        "displayName": "Border Control",
+        "canonical": "#78817f",
+        "tonalRamp": [
+          "oklch(15% 0.0111 181.17)",
+          "oklch(27% 0.0111 181.17)",
+          "oklch(38% 0.0111 181.17)",
+          "oklch(50% 0.0111 181.17)",
+          "oklch(61% 0.0111 181.17)",
+          "oklch(73% 0.0111 181.17)",
+          "oklch(84% 0.0111 181.17)",
+          "oklch(95% 0.0111 181.17)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "on-accent": {
+        "role": "primary",
+        "displayName": "On Accent",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(27% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(50% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(73% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "success": {
+        "role": "neutral",
+        "displayName": "Success",
+        "canonical": "#246344",
+        "tonalRamp": [
+          "oklch(15% 0.0827 158.82)",
+          "oklch(27% 0.0827 158.82)",
+          "oklch(38% 0.0827 158.82)",
+          "oklch(50% 0.0827 158.82)",
+          "oklch(61% 0.0827 158.82)",
+          "oklch(73% 0.0827 158.82)",
+          "oklch(84% 0.0827 158.82)",
+          "oklch(95% 0.0827 158.82)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "warning": {
+        "role": "neutral",
+        "displayName": "Warning",
+        "canonical": "#805315",
+        "tonalRamp": [
+          "oklch(15% 0.0949 69.50)",
+          "oklch(27% 0.0949 69.50)",
+          "oklch(38% 0.0949 69.50)",
+          "oklch(50% 0.0949 69.50)",
+          "oklch(61% 0.0949 69.50)",
+          "oklch(73% 0.0949 69.50)",
+          "oklch(84% 0.0949 69.50)",
+          "oklch(95% 0.0949 69.50)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "canonical": "#ac303a",
+        "tonalRamp": [
+          "oklch(15% 0.1597 20.81)",
+          "oklch(27% 0.1597 20.81)",
+          "oklch(38% 0.1597 20.81)",
+          "oklch(50% 0.1597 20.81)",
+          "oklch(61% 0.1597 20.81)",
+          "oklch(73% 0.1597 20.81)",
+          "oklch(84% 0.1597 20.81)",
+          "oklch(95% 0.1597 20.81)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "spotlight": {
+        "role": "primary",
+        "displayName": "Spotlight",
+        "canonical": "rgb(35 73 198 / 5%)"
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(73% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Surface",
+        "canonical": "#101619",
+        "tonalRamp": [
+          "oklch(15% 0.0198 229.95)",
+          "oklch(27% 0.0198 229.95)",
+          "oklch(38% 0.0198 229.95)",
+          "oklch(50% 0.0198 229.95)",
+          "oklch(61% 0.0198 229.95)",
+          "oklch(73% 0.0198 229.95)",
+          "oklch(84% 0.0198 229.95)",
+          "oklch(95% 0.0198 229.95)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-surface-soft": {
+        "role": "neutral",
+        "displayName": "Dark Surface Soft",
+        "canonical": "#182126",
+        "tonalRamp": [
+          "oklch(15% 0.0226 230.04)",
+          "oklch(27% 0.0226 230.04)",
+          "oklch(38% 0.0226 230.04)",
+          "oklch(50% 0.0226 230.04)",
+          "oklch(61% 0.0226 230.04)",
+          "oklch(73% 0.0226 230.04)",
+          "oklch(84% 0.0226 230.04)",
+          "oklch(95% 0.0226 230.04)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark Ink",
+        "canonical": "#f7f5ef",
+        "tonalRamp": [
+          "oklch(15% 0.0082 91.48)",
+          "oklch(27% 0.0082 91.48)",
+          "oklch(38% 0.0082 91.48)",
+          "oklch(50% 0.0082 91.48)",
+          "oklch(61% 0.0082 91.48)",
+          "oklch(73% 0.0082 91.48)",
+          "oklch(84% 0.0082 91.48)",
+          "oklch(95% 0.0082 91.48)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-ink-secondary": {
+        "role": "neutral",
+        "displayName": "Dark Ink Secondary",
+        "canonical": "#c0cdd2",
+        "tonalRamp": [
+          "oklch(15% 0.0158 222.71)",
+          "oklch(27% 0.0158 222.71)",
+          "oklch(38% 0.0158 222.71)",
+          "oklch(50% 0.0158 222.71)",
+          "oklch(61% 0.0158 222.71)",
+          "oklch(73% 0.0158 222.71)",
+          "oklch(84% 0.0158 222.71)",
+          "oklch(95% 0.0158 222.71)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Dark Accent",
+        "canonical": "#96adff",
+        "tonalRamp": [
+          "oklch(15% 0.1209 271.35)",
+          "oklch(27% 0.1209 271.35)",
+          "oklch(38% 0.1209 271.35)",
+          "oklch(50% 0.1209 271.35)",
+          "oklch(61% 0.1209 271.35)",
+          "oklch(73% 0.1209 271.35)",
+          "oklch(84% 0.1209 271.35)",
+          "oklch(95% 0.1209 271.35)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-accent-hover": {
+        "role": "primary",
+        "displayName": "Dark Accent Hover",
+        "canonical": "#b6c5ff",
+        "tonalRamp": [
+          "oklch(15% 0.0833 273.22)",
+          "oklch(27% 0.0833 273.22)",
+          "oklch(38% 0.0833 273.22)",
+          "oklch(50% 0.0833 273.22)",
+          "oklch(61% 0.0833 273.22)",
+          "oklch(73% 0.0833 273.22)",
+          "oklch(84% 0.0833 273.22)",
+          "oklch(95% 0.0833 273.22)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-accent-soft": {
+        "role": "primary",
+        "displayName": "Dark Accent Soft",
+        "canonical": "#293950",
+        "tonalRamp": [
+          "oklch(15% 0.0458 257.43)",
+          "oklch(27% 0.0458 257.43)",
+          "oklch(38% 0.0458 257.43)",
+          "oklch(50% 0.0458 257.43)",
+          "oklch(61% 0.0458 257.43)",
+          "oklch(73% 0.0458 257.43)",
+          "oklch(84% 0.0458 257.43)",
+          "oklch(95% 0.0458 257.43)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Dark Border",
+        "canonical": "#39464d",
+        "tonalRamp": [
+          "oklch(15% 0.0206 231.52)",
+          "oklch(27% 0.0206 231.52)",
+          "oklch(38% 0.0206 231.52)",
+          "oklch(50% 0.0206 231.52)",
+          "oklch(61% 0.0206 231.52)",
+          "oklch(73% 0.0206 231.52)",
+          "oklch(84% 0.0206 231.52)",
+          "oklch(95% 0.0206 231.52)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-border-control": {
+        "role": "neutral",
+        "displayName": "Dark Border Control",
+        "canonical": "#819398",
+        "tonalRamp": [
+          "oklch(15% 0.0219 216.29)",
+          "oklch(27% 0.0219 216.29)",
+          "oklch(38% 0.0219 216.29)",
+          "oklch(50% 0.0219 216.29)",
+          "oklch(61% 0.0219 216.29)",
+          "oklch(73% 0.0219 216.29)",
+          "oklch(84% 0.0219 216.29)",
+          "oklch(95% 0.0219 216.29)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-on-accent": {
+        "role": "primary",
+        "displayName": "Dark On Accent",
+        "canonical": "#172126",
+        "tonalRamp": [
+          "oklch(15% 0.0172 229.97)",
+          "oklch(27% 0.0172 229.97)",
+          "oklch(38% 0.0172 229.97)",
+          "oklch(50% 0.0172 229.97)",
+          "oklch(61% 0.0172 229.97)",
+          "oklch(73% 0.0172 229.97)",
+          "oklch(84% 0.0172 229.97)",
+          "oklch(95% 0.0172 229.97)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-success": {
+        "role": "neutral",
+        "displayName": "Dark Success",
+        "canonical": "#8ed7ac",
+        "tonalRamp": [
+          "oklch(15% 0.0953 157.63)",
+          "oklch(27% 0.0953 157.63)",
+          "oklch(38% 0.0953 157.63)",
+          "oklch(50% 0.0953 157.63)",
+          "oklch(61% 0.0953 157.63)",
+          "oklch(73% 0.0953 157.63)",
+          "oklch(84% 0.0953 157.63)",
+          "oklch(95% 0.0953 157.63)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-warning": {
+        "role": "neutral",
+        "displayName": "Dark Warning",
+        "canonical": "#e6c087",
+        "tonalRamp": [
+          "oklch(15% 0.0854 77.26)",
+          "oklch(27% 0.0854 77.26)",
+          "oklch(38% 0.0854 77.26)",
+          "oklch(50% 0.0854 77.26)",
+          "oklch(61% 0.0854 77.26)",
+          "oklch(73% 0.0854 77.26)",
+          "oklch(84% 0.0854 77.26)",
+          "oklch(95% 0.0854 77.26)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-error": {
+        "role": "neutral",
+        "displayName": "Dark Error",
+        "canonical": "#ffadb3",
+        "tonalRamp": [
+          "oklch(15% 0.0966 14.57)",
+          "oklch(27% 0.0966 14.57)",
+          "oklch(38% 0.0966 14.57)",
+          "oklch(50% 0.0966 14.57)",
+          "oklch(61% 0.0966 14.57)",
+          "oklch(73% 0.0966 14.57)",
+          "oklch(84% 0.0966 14.57)",
+          "oklch(95% 0.0966 14.57)"
+        ],
+        "tonalRampPurpose": "Synthesized preview ramp; not additional application tokens."
+      },
+      "dark-spotlight": {
+        "role": "primary",
+        "displayName": "Dark Spotlight",
+        "canonical": "rgb(150 173 255 / 7%)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Implemented display role; responsive exceptions are in typogrpahy.md."
+      },
+      "hero": {
+        "displayName": "Hero",
+        "purpose": "Implemented hero role; responsive exceptions are in typogrpahy.md."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Implemented headline role; responsive exceptions are in typogrpahy.md."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Implemented title role; responsive exceptions are in typogrpahy.md."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Implemented body role; responsive exceptions are in typogrpahy.md."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Implemented caption role; responsive exceptions are in typogrpahy.md."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Implemented action role; responsive exceptions are in typogrpahy.md."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "h1-reveal",
+        "value": "600ms expo.out",
+        "purpose": "3px blur to zero; H1 only."
+      },
+      {
+        "name": "hero-intro",
+        "value": "650ms expo.out",
+        "purpose": "12px translation to zero; hero only."
+      },
+      {
+        "name": "magnet",
+        "value": "200ms expo.out",
+        "purpose": "Mouse displacement capped at 3px."
+      },
+      {
+        "name": "theme-crossfade",
+        "value": "280ms ease-out",
+        "purpose": "Root View Transition crossfade."
+      },
+      {
+        "name": "theme-fallback",
+        "value": "240ms ease-out",
+        "purpose": "Background, color and border transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "370px"
+      },
+      {
+        "name": "mobile",
+        "value": "719px"
+      },
+      {
+        "name": "tablet",
+        "value": "1079px"
+      },
+      {
+        "name": "wide",
+        "value": "1600px"
+      }
+    ],
+    "themes": {
+      "lightSelector": ":root, :root[data-theme=\"light\"]",
+      "darkSelector": ":root[data-theme=\"dark\"]",
+      "darkTokenPrefix": "dark-",
+      "storageKey": "ayush404-theme",
+      "initialPreference": "Saved valid preference, otherwise initial prefers-color-scheme; applied in HTML head before paint."
+    },
+    "focus": {
+      "value": "2px solid var(--color-accent)",
+      "offset": "4px",
+      "primaryOffset": "5px"
+    },
+    "reducedMotion": "No CSS animation/transition; no intro blur/displacement or Magnet; theme updates without View Transition."
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action from the implemented semantic system.",
+      "html": "<a class=\"ds-primary\" href=\"#work\">View selected work</a>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;min-height:48px;padding:14px 22px;background:var(--color-accent);color:var(--color-on-accent);border-radius:4px;font:600 1rem/1.65 var(--font-body);text-decoration:none;transition:background-color .24s ease-out}.ds-primary:hover{background:var(--color-accent-hover)}.ds-primary:focus-visible{outline:2px solid var(--color-accent);outline-offset:4px;outline-offset:5px}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Text action from the implemented semantic system.",
+      "html": "<a class=\"ds-link\" href=\"#contact\">Let\u2019s talk</a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;min-height:44px;color:var(--color-accent);font:600 1rem/1.65 var(--font-body);text-decoration:underline;text-decoration-color:var(--color-border);text-underline-offset:.2em}.ds-link:hover{color:var(--color-accent-hover);text-decoration-color:currentColor}.ds-link:focus-visible{outline:2px solid var(--color-accent);outline-offset:4px;}"
+    },
+    {
+      "name": "Technology tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Technology tag from the implemented semantic system.",
+      "html": "<span class=\"ds-tag\">TYPO3</span>",
+      "css": ".ds-tag{display:inline-block;background:var(--color-surface-soft);color:var(--color-ink-secondary);padding:3px 9px;border-radius:4px;font:400 .875rem/1.5 var(--font-body)}"
+    },
+    {
+      "name": "Service surface",
+      "kind": "card",
+      "refersTo": "spotlight-card",
+      "description": "Service surface from the implemented semantic system.",
+      "html": "<article class=\"ds-card\"><h3>Search visibility</h3><p>Connected content, delivery and discovery.</p></article>",
+      "css": ".ds-card{background:var(--color-surface);color:var(--color-ink);border:1px solid var(--color-border);border-radius:8px;padding:32px}.ds-card h3{margin:0;font:500 1.75rem/1.2 var(--font-display);letter-spacing:-.025em}.ds-card p{color:var(--color-ink-secondary);font:400 1rem/1.65 var(--font-body);margin:20px 0 0}.ds-card:hover{background-image:radial-gradient(360px circle at 50% 50%,var(--color-spotlight),transparent 70%)}"
+    },
+    {
+      "name": "Theme control",
+      "kind": "button",
+      "refersTo": "theme-toggle",
+      "description": "Theme control from the implemented semantic system.",
+      "html": "<button class=\"ds-theme\" aria-label=\"Toggle color theme\" aria-pressed=\"false\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.25 6.25 0 0 0 8.268 8.268c.344-.215.825-.004.803.401\"/></svg></button>",
+      "css": ".ds-theme{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:transparent;color:var(--color-ink);border:1px solid var(--color-border-control);border-radius:4px;cursor:pointer}.ds-theme:hover{background:var(--color-accent-soft);color:var(--color-accent)}.ds-theme:focus-visible{outline:2px solid var(--color-accent);outline-offset:4px;}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "text-link",
+      "description": "Navigation from the implemented semantic system.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#work\">Work</a><a href=\"#engineering\">Engineering</a><a href=\"#contact\">Let\u2019s talk</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:30px;font:400 1rem/1.65 var(--font-body)}.ds-nav a{padding:10px 0;color:var(--color-ink);text-decoration:none}.ds-nav a:hover{color:var(--color-accent)}.ds-nav a:focus-visible{outline:2px solid var(--color-accent);outline-offset:4px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Engineering Fieldnotes",
+    "overview": "Engineering Fieldnotes is the implemented portfolio identity: considered typography, open editorial rows, quiet surfaces and concise technical annotations. Warm paper and deep ink establish a calm reading surface; cobalt identifies actions and connected architecture. The authorized dark theme preserves those relationships on a pure black canvas.\n\nThe signature pairs an oversized statement with an unboxed architecture annotation. Project stories explain real systems through labeled vector diagrams and readable prose. The hero remains a plain surface, without a moving background.",
+    "keyCharacteristics": [
+      "Open editorial rows and generous margins.",
+      "Space Grotesk headings with Source Sans 3 reading text.",
+      "Meaningful architecture diagrams and native controls.",
+      "Persistent AMOLED black dark theme and restrained motion."
+    ],
+    "rules": [
+      {
+        "name": "Semantic Color",
+        "body": "Use the existing semantic CSS variables so controls, diagrams and text follow the active theme together.",
+        "section": "colors"
+      },
+      {
+        "name": "Settled Reading",
+        "body": "Body text and section headings stay stable; the authored intro is reserved for H1 text and the homepage hero section.",
+        "section": "typography"
+      },
+      {
+        "name": "Flat Structure",
+        "body": "Use spacing, tonal surfaces and thin rules to express grouping; do not add ornamental shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do retain native headings, sections, links, buttons and disclosures.",
+      "Do pair architecture graphics with readable labels and adjacent explanation.",
+      "Do use visible focus and respect reduced motion in both themes.",
+      "Do label experiments and use only supported project claims."
+    ],
+    "donts": [
+      "Don't add an animated background to the hero.",
+      "Don't make important text depend on animation or hover.",
+      "Don't add skill scores, unverified metrics or CountUp without evidence.",
+      "Don't describe the adapted React Bits behaviors as unmodified upstream components."
+    ]
+  }
+}

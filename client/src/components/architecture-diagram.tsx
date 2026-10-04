@@ -1,5 +1,6 @@
-import { BitsText, BitsControl, AnimatedSection } from "./reactbits/experience";
-import { useState } from "react";
+import { BitsText } from "./reactbits/experience";
+import { useState, useRef } from "react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 const nodes = [
   [
     "TYPO3",
@@ -24,43 +25,63 @@ const nodes = [
 ];
 export default function ArchitectureDiagram() {
   const [active, setActive] = useState(0);
+  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   return (
-    <div className="system-map">
+    <aside
+      className="system-map"
+      aria-label="Explore the platform architecture"
+    >
       <div className="map-header">
-        <span>SYSTEM ARCHITECTURE</span>
-        <span className="map-marker">↗</span>
+        <span>Inside the platform</span>
+        <ArrowUpRight size={20} aria-hidden="true" />
       </div>
       <div className="map-nodes">
         {nodes.map(([name, label], i) => (
           <div className="node-wrap" key={name}>
-            <BitsControl
-              as="button"
+            <button
+              ref={(el) => {
+                buttons.current[i] = el;
+              }}
               className={`system-node ${active === i ? "selected" : ""}`}
+              type="button"
               aria-pressed={active === i}
+              aria-controls="architecture-description"
               onClick={() => setActive(i)}
+              onKeyDown={(event) => {
+                const delta = ["ArrowDown", "ArrowRight"].includes(event.key)
+                  ? 1
+                  : ["ArrowUp", "ArrowLeft"].includes(event.key)
+                    ? -1
+                    : 0;
+                if (delta) {
+                  event.preventDefault();
+                  const next = (i + delta + nodes.length) % nodes.length;
+                  setActive(next);
+                  buttons.current[next]?.focus();
+                }
+              }}
             >
-              <span className="node-index">0{i + 1}</span>
-              <span>
-                <strong>{name}</strong>
-                <small>{label}</small>
-              </span>
-              <span className="node-indicator" />
-            </BitsControl>
+              <strong>{name}</strong>
+              <small>{label}</small>
+              <span className="node-indicator" aria-hidden="true" />
+            </button>
             {i < nodes.length - 1 && (
               <div className="connection" aria-hidden="true">
-                <span />
+                <ArrowDown size={18} />
               </div>
             )}
           </div>
         ))}
       </div>
-      <BitsText as="p" className="map-description" aria-live="polite">
+      <BitsText
+        as="p"
+        id="architecture-description"
+        className="map-description"
+        aria-live="polite"
+      >
         {nodes[active][2]}
       </BitsText>
-      <div className="map-footer">
-        <span>CONTENT → EXPERIENCE</span>
-        <span>404 / SYSTEMS</span>
-      </div>
-    </div>
+      <p className="map-footer">Select a layer to see how it connects.</p>
+    </aside>
   );
 }

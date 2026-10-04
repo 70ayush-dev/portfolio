@@ -1,103 +1,82 @@
-import { ScanSearch, MessageSquareText, Network } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { searchServices } from "../data/portfolio";
 import { BitsText, BitsControl, AnimatedSection } from "./reactbits/experience";
 import SpotlightCard from "./reactbits/SpotlightCard";
-import { SectionHeading, Arrow, Tags } from "./platform-layout";
+import { SectionHeading, Arrow } from "./platform-layout";
 export default function SearchVisibilitySection() {
-  const icons = [ScanSearch, MessageSquareText, Network];
   return (
     <AnimatedSection id="search" className="section search-section">
       <SectionHeading
-        number="04"
-        label="SEARCH & AI VISIBILITY"
         title="Search-ready web platforms."
         text="Modern websites need to be discoverable by more than traditional search engines. I build web platforms where technical SEO, structured content, AEO and GEO are considered alongside the CMS, frontend and backend architecture."
       />
       <div className="search-overview">
         <div className="search-service-intro">
-          <BitsText as="p" className="eyebrow">
-            SEO · AEO · GEO / PROFESSIONAL CAPABILITY
-          </BitsText>
-          <BitsText as="h3">
-            Search & AI Visibility Engineering<span className="accent">.</span>
-          </BitsText>
-          <BitsText as="p">
+          <BitsText as="h3">Search & AI Visibility Engineering.</BitsText>
+          <p>
             I build websites with search visibility considered at the
             architecture level — combining technical SEO, structured content,
             answer-engine optimization and generative-search optimization.
-          </BitsText>
-          <Tags
-            values={[
-              "Structured Content",
-              "Semantic HTML",
-              "Schema.org",
-              "JSON-LD",
-              "Core Web Vitals",
-              "AI Search",
-            ]}
-          />
+          </p>
           <BitsControl as="a" className="text-link" href="#contact">
             Discuss your platform’s visibility <Arrow />
           </BitsControl>
         </div>
-        <SpotlightCard className="visibility-map">
-          <BitsText as="p" className="eyebrow">
-            ONE PLATFORM / THREE AUDIENCES
-          </BitsText>
-          <div className="visibility-root">WEB PLATFORM</div>
+        <figure
+          className="visibility-map"
+          aria-label="Web platform architecture connects users, search and AI through structured content"
+        >
+          <div className="visibility-root">Web platform</div>
           <div className="visibility-branches">
             {[
-              ["USERS", "UX / UI"],
-              ["SEARCH", "SEO"],
+              ["Users", "UX / UI"],
+              ["Search", "Technical SEO"],
               ["AI", "AEO / GEO"],
             ].map(([name, role]) => (
               <div key={name}>
-                <span aria-hidden="true">↓</span>
-                <BitsText as="h4">{name}</BitsText>
-                <BitsText as="p">{role}</BitsText>
+                <ArrowDown size={18} aria-hidden="true" />
+                <strong>{name}</strong>
+                <span>{role}</span>
               </div>
             ))}
           </div>
           <div className="visibility-foundation">
-            <span aria-hidden="true">↓</span>
-            <strong>STRUCTURED CONTENT</strong>
-            <span aria-hidden="true">↓</span>
-            <span>WEB PLATFORM</span>
+            <ArrowDown size={20} aria-hidden="true" />
+            <strong>Structured content</strong>
+            <ArrowDown size={20} aria-hidden="true" />
+            <span>Web platform</span>
           </div>
-          <BitsText as="p" className="visibility-caption">
+          <figcaption>
             Useful for people. Understandable to search and AI systems.
-          </BitsText>
-        </SpotlightCard>
+          </figcaption>
+        </figure>
       </div>
       <div className="search-services">
-        {searchServices.map((service, i) => {
-          const Icon = icons[i];
-          return (
-            <SpotlightCard key={service.title}>
-              <div className="card-top">
-                <Icon size={25} />
-                <span>0{i + 1}</span>
-              </div>
-              <BitsText as="p" className="eyebrow">
-                {service.label}
-              </BitsText>
-              <BitsText as="h3">{service.title}</BitsText>
-              <BitsText as="p">{service.text}</BitsText>
-              <ul>
-                {service.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </SpotlightCard>
-          );
-        })}
+        {searchServices.map((service) => (
+          <SpotlightCard key={service.title}>
+            <BitsText as="h3">{service.title}</BitsText>
+            {service.title !== "Technical SEO" && (
+              <p className="service-expansion">
+                {service.title === "AEO"
+                  ? "Answer Engine Optimization"
+                  : "Generative Engine Optimization"}
+              </p>
+            )}
+            <p>{service.text}</p>
+            <ul>
+              {service.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </SpotlightCard>
+        ))}
       </div>
       <div className="search-proof">
-        <BitsText as="p">
+        <p>
           Clear entity information, structured answers and contextual internal
           links build on sound technical SEO. Rankings and inclusion in AI
           answers are not guaranteed.
-        </BitsText>
+        </p>
         <BitsControl
           as="a"
           className="text-link"

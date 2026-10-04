@@ -3,6 +3,8 @@ import {
   BitsControl,
   AnimatedSection,
 } from "../components/reactbits/experience";
+import { ArrowLeft } from "lucide-react";
+import ProjectVisual from "../components/project-visual";
 import { projects } from "../data/portfolio";
 import { Navigation, Footer, Tags, Arrow } from "../components/platform-layout";
 export default function CaseStudy({ slug }: { slug: string }) {
@@ -10,17 +12,14 @@ export default function CaseStudy({ slug }: { slug: string }) {
   if (!project) return null;
   return (
     <>
-      <BitsControl as="a" className="skip-link" href="#main">
+      <a className="skip-link" href="#main">
         Skip to content
-      </BitsControl>
+      </a>
       <Navigation />
       <main id="main" className="case-study section">
-        <BitsControl as="a" className="text-link" href="/#work">
-          ← Back to selected work
+        <BitsControl as="a" className="text-link back-link" href="/#work">
+          <ArrowLeft size={18} aria-hidden="true" /> Back to selected work
         </BitsControl>
-        <BitsText as="p" className="eyebrow case-label">
-          {project.status || "ENGINEERING CASE STUDY"}
-        </BitsText>
         <BitsText as="h1">
           {project.title}
           <span className="accent">.</span>
@@ -28,7 +27,14 @@ export default function CaseStudy({ slug }: { slug: string }) {
         <BitsText as="p" className="case-subtitle">
           {project.subtitle}
         </BitsText>
+        {project.status && (
+          <span className="experiment-status">{project.status}</span>
+        )}
         <Tags values={project.technologies} />
+        <ProjectVisual
+          project={project}
+          featured={project.slug === "der-autoputzer"}
+        />
         <AnimatedSection className="case-section">
           <BitsText as="h2">Overview</BitsText>
           <BitsText as="p">{project.description}</BitsText>

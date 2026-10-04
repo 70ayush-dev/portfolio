@@ -1,17 +1,9 @@
+import { ArrowDown, Plus } from "lucide-react";
 import {
   BitsText,
   BitsControl,
   AnimatedSection,
 } from "../components/reactbits/experience";
-import { useEffect, useState, lazy, Suspense } from "react";
-import {
-  ArrowDown,
-  Layers,
-  Code2,
-  Workflow,
-  LayoutTemplate,
-  ScanSearch,
-} from "lucide-react";
 import {
   identity,
   projects,
@@ -28,61 +20,26 @@ import {
   SectionHeading,
   Arrow,
 } from "../components/platform-layout";
-import SearchVisibilitySection from "../components/search-visibility-section";
 import ArchitectureDiagram from "../components/architecture-diagram";
+import ProjectVisual from "../components/project-visual";
+import SearchVisibilitySection from "../components/search-visibility-section";
 import SpotlightCard from "../components/reactbits/SpotlightCard";
-const Threads = lazy(() => import("../components/reactbits/Threads"));
-function HeroBackground() {
-  const [animate, setAnimate] = useState(false);
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setAnimate(!query.matches);
-    sync();
-    query.addEventListener("change", sync);
-    return () => query.removeEventListener("change", sync);
-  }, []);
-  return (
-    <div className="hero-background" aria-hidden="true">
-      {animate && (
-        <Suspense fallback={null}>
-          <Threads
-            color={[0.75, 0.93, 0.47]}
-            amplitude={1.2}
-            distance={0.35}
-            enableMouseInteraction={false}
-          />
-        </Suspense>
-      )}
-    </div>
-  );
-}
+
 export default function Portfolio() {
-  const icons = [Layers, Code2, Workflow, LayoutTemplate, ScanSearch];
   return (
     <>
-      <BitsControl as="a" className="skip-link" href="#main">
+      <a className="skip-link" href="#main">
         Skip to content
-      </BitsControl>
+      </a>
       <Navigation />
       <main id="main">
-        <AnimatedSection className="hero">
-          <HeroBackground />
-          <div className="hero-topline">
-            <BitsText as="p" className="eyebrow">
-              AYUSH SINGH / WEB PLATFORM ENGINEER
-            </BitsText>
-            <BitsText as="p" className="status">
-              <span /> Building web platforms & AI tools
-            </BitsText>
-          </div>
+        <AnimatedSection className="hero" motion="intro">
           <div className="hero-grid">
             <div className="hero-copy">
               <BitsText as="h1">
                 Building the systems
-                <br />
-                behind <span>modern web</span>
-                <br />
-                experiences<span className="accent">.</span>
+                <br className="hero-break" /> behind <span>modern web</span>{" "}
+                experiences.
               </BitsText>
               <BitsText as="p" className="hero-description">
                 I build modern web platforms, CMS architectures and
@@ -98,18 +55,14 @@ export default function Portfolio() {
                   Let’s talk <Arrow />
                 </BitsControl>
               </div>
-              <BitsText as="p" className="hero-stack">
-                PHP · TYPO3 · VUE · NUXT · TAILWIND · SEO · AEO · GEO · AI ·
-                AUTOMATION
-              </BitsText>
             </div>
             <ArchitectureDiagram />
           </div>
           <div className="hero-bottom">
-            <BitsText as="p">BASED IN INDIA · WORKING GLOBALLY</BitsText>
-            <BitsControl as="a" href="#build">
-              Explore the architecture <ArrowDown size={15} />
-            </BitsControl>
+            <p>Based in India. Working with teams globally.</p>
+            <a href="#work">
+              Explore the work <ArrowDown size={18} aria-hidden="true" />
+            </a>
           </div>
         </AnimatedSection>
         <div className="technology-strip" aria-label="Core technologies">
@@ -128,25 +81,17 @@ export default function Portfolio() {
             <span key={t}>{t}</span>
           ))}
         </div>
-        <AnimatedSection id="build" className="section">
+        <AnimatedSection id="build" className="section capabilities-section">
           <SectionHeading
-            number="01"
-            label="WHAT I BUILD"
             title="Systems, not just websites."
             text="My work sits between backend architecture and frontend experience — building the systems that power websites and the interfaces people actually use."
           />
           <div className="capabilities">
-            {capabilities.map((c, i) => {
-              const Icon = icons[i];
-              return (
-                <SpotlightCard key={c.title}>
-                  <div className="card-top">
-                    <Icon size={25} />
-                    <span>0{i + 1}</span>
-                  </div>
-                  <BitsText as="h3">{c.title}</BitsText>
+            {capabilities.map((c) => (
+              <article className="capability-row" key={c.title}>
+                <BitsText as="h3">{c.title}</BitsText>
+                <div>
                   <BitsText as="p">{c.text}</BitsText>
-                  <Tags values={c.tags} />
                   {c.title === "Search & AI Visibility" && (
                     <BitsControl
                       as="a"
@@ -156,76 +101,29 @@ export default function Portfolio() {
                       Explore the service <Arrow />
                     </BitsControl>
                   )}
-                </SpotlightCard>
-              );
-            })}
+                </div>
+                <Tags values={c.tags} />
+              </article>
+            ))}
           </div>
         </AnimatedSection>
         <AnimatedSection id="work" className="section work-section">
           <SectionHeading
-            number="02"
-            label="SELECTED WORK"
-            title="Built around real problems."
-            text="A selection of platforms, systems and experiments. The architecture matters as much as the interface."
+            title="Selected work."
+            text="Platforms, systems and experiments. A closer look at the engineering behind the interface."
           />
           <div className="project-grid">
             {projects.map((p, i) => (
-              <article key={p.slug} className={`project project-${i}`}>
-                <BitsControl
-                  as="a"
-                  className="project-visual"
-                  href={`/work/${p.slug}/`}
-                  aria-label={`View ${p.title} case study`}
-                >
-                  <div className="visual-top">
-                    <span>{p.status || "ENGINEERING CASE STUDY"}</span>
-                    <span>0{i + 1} ↗</span>
-                  </div>
-                  {i === 0 ? (
-                    <div className="platform-preview">
-                      <div className="preview-bar">
-                        <span>DER AUTOPUTZER</span>
-                        <span>PLATFORM REBUILD</span>
-                      </div>
-                      <BitsText as="p">
-                        Content.
-                        <br />
-                        Components.
-                        <br />
-                        <em>Connected.</em>
-                      </BitsText>
-                      <div className="preview-blocks">
-                        <span>TYPO3 CMS</span>
-                        <span>NUXT FRONTEND ↗</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="project-flow">
-                      {p.flow.slice(0, 5).map((step, n) => (
-                        <div key={step}>
-                          <span className="flow-number">0{n + 1}</span>
-                          {step}
-                          {n < Math.min(p.flow.length, 5) - 1 && (
-                            <span className="flow-arrow">↓</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  <span className="visual-caption">
-                    ARCHITECTURE OVERVIEW / {p.technologies[0]}
-                  </span>
-                </BitsControl>
+              <article className={`project project-${i}`} key={p.slug}>
+                <ProjectVisual project={p} featured={i === 0} />
                 <div className="project-copy">
-                  <BitsText as="p" className="eyebrow">
-                    {p.subtitle}
-                  </BitsText>
                   <BitsText as="h3">
-                    <BitsControl as="a" href={`/work/${p.slug}/`}>
-                      {p.title}
-                      <Arrow />
-                    </BitsControl>
+                    <a href={`/work/${p.slug}/`}>{p.title}</a>
                   </BitsText>
+                  <p className="project-subtitle">{p.subtitle}</p>
+                  {p.status && (
+                    <span className="experiment-status">{p.status}</span>
+                  )}
                   <BitsText as="p">{p.description}</BitsText>
                   <Tags values={p.technologies} />
                   <BitsControl
@@ -240,33 +138,29 @@ export default function Portfolio() {
             ))}
           </div>
         </AnimatedSection>
-        <AnimatedSection id="engineering" className="section">
+        <AnimatedSection
+          id="engineering"
+          className="section engineering-section"
+        >
           <SectionHeading
-            number="03"
-            label="ENGINEERING"
-            title="Across the stack."
+            title="Engineering across the stack."
             text="Deep CMS expertise. Modern frontend thinking. The tools to connect it all."
           />
           <div className="engineering-grid">
             <div className="stack-list">
-              {stack.map(([name, tools], i) => (
+              {stack.map(([name, tools]) => (
                 <div key={name}>
-                  <span className="stack-index">0{i + 1}</span>
                   <BitsText as="h3">{name}</BitsText>
                   <BitsText as="p">{tools}</BitsText>
                 </div>
               ))}
             </div>
             <aside className="specialization">
-              <BitsText as="p" className="eyebrow">
-                A STRONG FOUNDATION
-              </BitsText>
-              <BitsText as="h3">
-                Deep TYPO3
-                <br />
-                experience<span className="accent">.</span>
-              </BitsText>
-              <div className="version-timeline">
+              <BitsText as="h3">Deep TYPO3 experience.</BitsText>
+              <div
+                className="version-timeline"
+                aria-label="TYPO3 versions used"
+              >
                 {["v11", "v12", "v13", "v14"].map((v) => (
                   <span key={v}>{v}</span>
                 ))}
@@ -275,9 +169,12 @@ export default function Portfolio() {
                 Custom extensions. Content Blocks. Fluid. Upgrade wizards.
                 Backend modules. Site packages. Migrations, SEO and performance.
               </BitsText>
-              <BitsText as="p">
+              <p>
                 Experience with the details that make a CMS work in production.
-              </BitsText>
+              </p>
+              <a className="text-link" href="/work/content-block-system/">
+                See the content architecture <Arrow />
+              </a>
             </aside>
           </div>
           <div className="problems">
@@ -286,7 +183,7 @@ export default function Portfolio() {
               {problems.map(([name, text]) => (
                 <article key={name}>
                   <BitsText as="h4">{name}</BitsText>
-                  <BitsText as="p">{text}</BitsText>
+                  <p>{text}</p>
                 </article>
               ))}
             </div>
@@ -295,23 +192,16 @@ export default function Portfolio() {
         <SearchVisibilitySection />
         <AnimatedSection id="lab" className="section lab-section">
           <SectionHeading
-            number="05"
-            label="THE LAB"
             title="Practical AI. Real curiosity."
             text="Exploring the intersection of AI and web engineering — tools that remove repetitive work, improve CMS workflows and make complex systems easier to use."
           />
           <div className="lab-grid">
-            {experiments.map(([title, text, status, tech], i) => (
-              <SpotlightCard key={title}>
-                <div className="card-top">
-                  <span className="lab-number">L / 0{i + 1}</span>
-                  <span className="experiment-status">{status}</span>
-                </div>
+            {experiments.map(([title, text, status, tech]) => (
+              <SpotlightCard className="experiment-card" key={title}>
                 <BitsText as="h3">{title}</BitsText>
-                <BitsText as="p">{text}</BitsText>
-                <BitsText as="p" className="lab-tech">
-                  {tech}
-                </BitsText>
+                <span className="experiment-status">{status}</span>
+                <p>{text}</p>
+                <p className="lab-tech">{tech}</p>
               </SpotlightCard>
             ))}
           </div>
@@ -325,91 +215,89 @@ export default function Portfolio() {
         </AnimatedSection>
         <AnimatedSection id="about" className="section about-section">
           <div>
-            <BitsText as="p" className="eyebrow">
-              06 / ABOUT AYUSH
-            </BitsText>
-            <BitsText as="h2">
-              Comfortable with
+            <BitsText as="h2">Comfortable with the complicated.</BitsText>
+            <p className="about-location">
+              Ayush Singh · Web Platform Engineer
               <br />
-              the complicated<span className="accent">.</span>
-            </BitsText>
-            <BitsText as="p" className="about-location">
-              INDIA → TEAMS AROUND THE WORLD
-            </BitsText>
+              India → teams around the world
+            </p>
           </div>
           <div className="about-copy">
-            <BitsText as="p">
+            <p>
               I’m Ayush Singh, a web engineer focused on building modern
               platforms around TYPO3 and PHP while working across modern
               frontend development, SEO, AEO, GEO, AI and developer automation.
-            </BitsText>
-            <BitsText as="p">
+            </p>
+            <p>
               My work sits between backend architecture and frontend experience.
               I enjoy taking complicated legacy workflows and turning them into
               simpler, reusable systems.
-            </BitsText>
-            <BitsText as="p">
+            </p>
+            <p>
               I work extensively with TYPO3 and PHP while building modern
               interfaces with Vue, Nuxt and Tailwind. More recently, I’m
               exploring practical applications of AI, RAG and automation to
               improve CMS workflows and development processes.
-            </BitsText>
-            <BitsControl as="a" className="text-link" href="#search">
-              Search & AI visibility capabilities <Arrow />
-            </BitsControl>
-            <BitsControl as="a" className="text-link" href={identity.linkedin}>
-              Connect on LinkedIn <Arrow />
-            </BitsControl>
+            </p>
+            <div className="about-links">
+              <BitsControl as="a" className="text-link" href="#search">
+                Search & AI visibility capabilities <Arrow />
+              </BitsControl>
+              <BitsControl
+                as="a"
+                className="text-link"
+                href={identity.linkedin}
+              >
+                Connect on LinkedIn <Arrow />
+              </BitsControl>
+            </div>
           </div>
         </AnimatedSection>
         <AnimatedSection className="section faq-section">
-          <SectionHeading
-            number="07"
-            label="QUICK ANSWERS"
-            title="A little more context."
-          />
+          <SectionHeading title="A little more context." />
           <div className="faq-list">
             {faqs.map(([q, a]) => (
               <details key={q}>
                 <summary>
                   {q}
-                  <span aria-hidden="true">+</span>
+                  <Plus size={20} aria-hidden="true" />
                 </summary>
-                <BitsText as="p">{a}</BitsText>
+                <p>{a}</p>
               </details>
             ))}
           </div>
         </AnimatedSection>
         <AnimatedSection id="contact" className="section contact-section">
-          <BitsText as="p" className="eyebrow">
-            LET’S BUILD SOMETHING THAT WORKS
-          </BitsText>
-          <BitsText as="h2">
-            Have a complex
-            <br />
-            web problem<span className="accent">?</span>
-          </BitsText>
-          <BitsText as="p">
-            Let’s talk about the architecture, the problem and what we can
-            build.
-          </BitsText>
-          <BitsControl
-            as="a"
-            className="button primary"
-            href={`mailto:${identity.email}`}
-          >
-            Start a conversation <Arrow />
-          </BitsControl>
-          <div className="contact-links">
-            <BitsControl as="a" href={`mailto:${identity.email}`}>
+          <div>
+            <BitsText as="h2">
+              Have a complex
+              <br />
+              web problem?
+            </BitsText>
+            <p>
+              Let’s talk about the architecture, the problem and what we can
+              build.
+            </p>
+          </div>
+          <div className="contact-actions">
+            <BitsControl
+              as="a"
+              className="button primary"
+              href={`mailto:${identity.email}`}
+            >
+              Start a conversation <Arrow />
+            </BitsControl>
+            <a className="contact-email" href={`mailto:${identity.email}`}>
               {identity.email}
-            </BitsControl>
-            <BitsControl as="a" href={identity.github}>
-              GitHub <Arrow />
-            </BitsControl>
-            <BitsControl as="a" href={identity.linkedin}>
-              LinkedIn <Arrow />
-            </BitsControl>
+            </a>
+            <div className="contact-links">
+              <a href={identity.github}>
+                GitHub <Arrow />
+              </a>
+              <a href={identity.linkedin}>
+                LinkedIn <Arrow />
+              </a>
+            </div>
           </div>
         </AnimatedSection>
       </main>

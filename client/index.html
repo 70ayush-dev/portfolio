@@ -14,9 +14,23 @@
     />
     <link rel="canonical" href="https://ayush404.in/" />
     <!--seo-end-->
-    <meta name="theme-color" content="#080a08" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="theme-color" content="#F7F5EF" />
+    <script>
+      (() => {
+        let preference;
+        try {
+          preference = localStorage.getItem("ayush404-theme");
+        } catch {}
+        const dark =
+          preference === "dark" ||
+          (preference !== "light" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", dark ? "#000000" : "#F7F5EF");
+      })();
+    </script>
     <!-- Google Analytics -->
     <script
       async
