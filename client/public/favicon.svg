@@ -1,5 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>Ayush Singh</title>
-  <rect width="64" height="64" rx="12" fill="#2349C6"/>
-  <path fill="#F7F5EF" fill-rule="evenodd" d="M14 48 27 14h10l13 34H40l-3-9H27l-3 9Zm16-17h4l-2-7Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" class="grad-top" stop-color="#141c22"/>
+      <stop offset="100%" class="grad-bot" stop-color="#020507"/>
+    </linearGradient>
+    <style>
+      .bg { fill: url(#bgGrad); }
+      .border { stroke: #39464d; stroke-width: 1.5; fill: none; }
+      .text-as {
+        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: -0.06em;
+        fill: #f7f5ef;
+      }
+      .accent-dot { fill: #96adff; }
+      @media (prefers-color-scheme: light) {
+        .grad-top { stop-color: #172126; }
+        .grad-bot { stop-color: #0d1417; }
+        .border { stroke: #4c585d; }
+        .text-as { fill: #f7f5ef; }
+        .accent-dot { fill: #4872f2; }
+      }
+    </style>
+  </defs>
+  <rect width="64" height="64" rx="15" class="bg"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14.25" class="border"/>
+  <text x="9" y="42" class="text-as">AS</text>
+  <circle cx="53" cy="40" r="4.5" class="accent-dot"/>
 </svg>
