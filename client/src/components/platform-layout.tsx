@@ -24,12 +24,8 @@ export function Navigation() {
     <header className="site-header">
       <div className="masthead">
         <a className="brand" href="/" aria-label="Ayush Singh home">
-          AYUSH<span>404</span>
-          <span className="brand-dot">.</span>
+          Ayush Singh<span className="brand-dot">.</span>
         </a>
-        <p className="masthead-identity">
-          Ayush Singh<span>Web Platform Engineer</span>
-        </p>
       </div>
       <div className="header-controls">
         <ThemeToggle />
@@ -83,8 +79,8 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div>
-        <a className="brand" href="/">
-          AYUSH<span>404</span>.
+        <a className="brand" href="/" aria-label="Ayush Singh home">
+          Ayush Singh<span className="brand-dot">.</span>
         </a>
         <p>Web Platform Engineer</p>
       </div>
