@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import ProjectVisual from "../components/project-visual";
 import { projects } from "../data/portfolio";
 import { Navigation, Footer, Tags, Arrow } from "../components/platform-layout";
+import AnimatedMascot from "../components/animated-mascot";
 export default function CaseStudy({ slug }: { slug: string }) {
   const project = projects.find((p) => p.slug === slug);
   if (!project) return null;
@@ -105,6 +106,7 @@ export default function CaseStudy({ slug }: { slug: string }) {
         </div>
       </main>
       <Footer />
+      <AnimatedMascot />
     </>
   );
 }

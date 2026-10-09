@@ -12,7 +12,7 @@ const escape = (text) =>
     .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
-const routes = ["/", ...projects.map((p) => `/work/${p.slug}/`), "/404.html"];
+const routes = ["/", "/lab/mascot/", ...projects.map((p) => `/work/${p.slug}/`), "/404.html"];
 const person = {
   "@type": "Person",
   "@id": `${identity.url}/#person`,
@@ -23,6 +23,8 @@ const person = {
   knowsAbout: [
     "TYPO3",
     "PHP",
+    "Python",
+    "Node.js",
     "Laravel",
     "WordPress",
     "Joomla",
@@ -49,14 +51,19 @@ const person = {
 };
 for (const path of routes) {
   const project = projects.find((p) => path === `/work/${p.slug}/`);
+  const isMascot = path === "/lab/mascot/";
   const title = project
     ? `${project.title} — Ayush Singh | Engineering Case Study`
-    : path === "/404.html"
-      ? "Page not found — Ayush404"
-      : "Ayush Singh — Web Platform Engineer | TYPO3, PHP, Vue, SEO & AI";
+    : isMascot
+      ? "Make Your Own Animated Mascot in 20 Minutes — Ayush Singh Lab"
+      : path === "/404.html"
+        ? "Page not found — Ayush404"
+        : "Ayush Singh — Web Platform Engineer | TYPO3, PHP, Vue, SEO & AI";
   const description =
     project?.description ||
-    "Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, SEO, AEO, GEO, AI integrations and web automation.";
+    (isMascot
+      ? "Step-by-step guide to building interactive, procedural SVG animated mascots for web platforms."
+      : "Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, SEO, AEO, GEO, AI integrations and web automation.");
   const graph = [
     person,
     {
@@ -139,11 +146,12 @@ for (const path of routes) {
   await mkdir(output.slice(0, output.lastIndexOf("/")), { recursive: true });
   await writeFile(output, html);
 }
+const today = new Date().toISOString().split("T")[0];
 await writeFile(
   "dist/sitemap.xml",
   `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes
     .filter((r) => r !== "/404.html")
-    .map((r) => `<url><loc>${identity.url + r}</loc></url>`)
+    .map((r) => `<url><loc>${identity.url + r}</loc><lastmod>${today}</lastmod></url>`)
     .join("")}</urlset>`,
 );
 await writeFile(
@@ -159,6 +167,7 @@ This is Ayush's professional portfolio. Project pages describe engineering work 
 - [Homepage](${identity.url}/): Professional identity, capabilities, selected work and contact information.
 - [Engineering](${identity.url}/#engineering): Technical skills and platform engineering expertise.
 - [Search & AI Visibility](${identity.url}/#search): Technical SEO, AEO and GEO capabilities and services.
+- [Animated Mascot Lab](${identity.url}/lab/mascot/): Step-by-step 20-minute guide and procedural SVG character engine with 23 animated moods.
 
 ## Case studies
 

@@ -3,8 +3,11 @@ export const identity = {
   role: "Web Platform Engineer",
   url: "https://ayush404.in",
   email: "ayush8000342870@gmail.com",
+  phone: "+91-7016441774",
+  location: "Bhavnagar, Gujarat, India",
   github: "https://github.com/70ayush-dev",
   linkedin: "https://linkedin.com/in/ayush-singhdev",
+  resume: "/resume.pdf",
 };
 export interface Project {
   slug: string;
@@ -260,7 +263,7 @@ export const capabilities = [
   {
     title: "Full-Stack Platforms",
     text: "Modern web applications connecting robust backend systems with modern frontend experiences.",
-    tags: ["PHP", "Laravel", "Vue", "Nuxt", "Next.js", "React", "REST APIs"],
+    tags: ["PHP", "Python", "Node.js", "Laravel", "Vue", "Nuxt", "Next.js", "React", "REST APIs"],
   },
   {
     title: "E-commerce Platforms",
@@ -270,7 +273,7 @@ export const capabilities = [
   {
     title: "AI & Automation",
     text: "AI-powered assistants, RAG systems, migration automation and developer tooling.",
-    tags: ["LLMs", "RAG", "AI APIs", "MCP"],
+    tags: ["Python", "LLMs", "RAG", "AI APIs", "MCP"],
   },
   {
     title: "UI Engineering",
@@ -294,7 +297,7 @@ export const capabilities = [
   },
 ];
 export const stack = [
-  ["Backend", "PHP · Laravel · Fluid · Composer · MySQL · REST APIs"],
+  ["Backend", "PHP · Python · Node.js · Laravel · Fluid · Composer · MySQL · REST APIs"],
   ["CMS & Commerce", "TYPO3 · WordPress · Joomla · Shopify · PrestaShop"],
   [
     "Frontend",
@@ -330,6 +333,13 @@ export const problems = [
   ["API integrations", "Connecting Stripe, Twilio and external systems."],
 ];
 export const experiments = [
+  [
+    "Animated Mascot System",
+    "Procedural SVG character with 23 moods, reactive states, and scroll hints.",
+    "FEATURED GUIDE",
+    "SVG / React / Motion",
+    "/lab/mascot/",
+  ],
   [
     "TYPO3 × AI Migration Assistant",
     "AI-assisted legacy content analysis and mapping.",
@@ -382,7 +392,7 @@ export const faqs = [
   ],
   [
     "Which technologies does Ayush use?",
-    "Ayush works with PHP, TYPO3, Laravel, WordPress, Joomla, Shopify and PrestaShop, alongside Vue, Nuxt, React, Next.js, TypeScript and Tailwind. His platform work also includes Firebase, REST APIs, SEO, AEO, GEO and AI integrations.",
+    "Ayush works with PHP, Python, Node.js, TYPO3, Laravel, WordPress, Joomla, Shopify and PrestaShop, alongside Vue, Nuxt, React, Next.js, TypeScript and Tailwind. His platform work also includes Firebase, REST APIs, SEO, AEO, GEO and AI integrations.",
   ],
   [
     "What TYPO3 experience does Ayush have?",
@@ -397,3 +407,80 @@ export const faqs = [
     "Ayush is exploring RAG-based content retrieval, conversational CMS interfaces, AI-assisted migration, content workflows and developer automation.",
   ],
 ];
+
+export interface CareerItem {
+  period: string;
+  role: string;
+  organization: string;
+  location: string;
+  type: "work" | "education";
+  highlights: string[];
+  tags: string[];
+}
+
+export const careerTimeline: CareerItem[] = [
+  {
+    period: "October 2023 – Present",
+    role: "PHP & TYPO3 Developer",
+    organization: "NET2TYPO Web Services",
+    location: "Bhavnagar, Gujarat, India",
+    type: "work",
+    highlights: [
+      "Architected 10+ custom TYPO3 extensions with complex backend modules, site packages, and scheduler tasks.",
+      "Engineered data import pipelines processing 300k+ records, reducing execution time by 60%.",
+      "Implemented AI-powered automation using OpenAI GPT, improving workflow efficiency by 40%.",
+      "Built AI Property Email Inquiry Assistant for Bonafinca Real Estate, cutting manual inquiry handling by 60%.",
+      "Integrated REST APIs, Pusher messaging, and Chatwoot CRM serving 50k+ monthly users with 50% faster response times.",
+    ],
+    tags: ["TYPO3 (v11–v14)", "PHP", "Python", "Node.js", "OpenAI GPT", "REST APIs", "MySQL", "Pusher", "Chatwoot"],
+  },
+  {
+    period: "January 2023 – March 2023",
+    role: "PHP Developer",
+    organization: "Apex Software House",
+    location: "Gujarat, India",
+    type: "work",
+    highlights: [
+      "Contributed to scalable Drupal-based CMS solutions with custom modules.",
+      "Utilized Git version control workflows for agile team collaboration and feature branching.",
+      "Enhanced core functionalities and resolved production issues in agile sprint environments.",
+    ],
+    tags: ["PHP", "Drupal", "Git", "CMS", "MySQL"],
+  },
+  {
+    period: "2018 – 2022",
+    role: "B.Tech in Computer Science & Engineering",
+    organization: "Parul University",
+    location: "Gujarat, India",
+    type: "education",
+    highlights: [
+      "Graduated with a Bachelor of Technology in Computer Science and Engineering.",
+      "Core training in software development, data structures, algorithms, relational database design, and systems architecture.",
+    ],
+    tags: ["Computer Science", "Engineering", "Algorithms", "System Architecture", "MySQL"],
+  },
+];
+
+export const metrics = [
+  {
+    value: "3+ Years",
+    label: "Professional Experience",
+    detail: "Enterprise CMS, backend architecture, and modern full-stack platforms.",
+  },
+  {
+    value: "300k+",
+    label: "Records Processed",
+    detail: "High-throughput ETL data import pipelines with 60% execution time reduction.",
+  },
+  {
+    value: "10+",
+    label: "Custom Extensions",
+    detail: "Custom TYPO3 extensions, backend modules, site packages, and scheduler tasks.",
+  },
+  {
+    value: "60%",
+    label: "Inquiry Handling Reduced",
+    detail: "Real estate AI email inquiry assistant delivering automated contextual responses.",
+  },
+];
+

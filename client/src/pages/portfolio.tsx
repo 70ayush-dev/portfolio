@@ -1,4 +1,4 @@
-import { ArrowDown, Plus } from "lucide-react";
+import { ArrowDown, Plus, Download } from "lucide-react";
 import {
   BitsText,
   BitsControl,
@@ -12,6 +12,8 @@ import {
   problems,
   experiments,
   faqs,
+  careerTimeline,
+  metrics,
 } from "../data/portfolio";
 import {
   Navigation,
@@ -24,6 +26,7 @@ import ArchitectureDiagram from "../components/architecture-diagram";
 import ProjectVisual from "../components/project-visual";
 import SearchVisibilitySection from "../components/search-visibility-section";
 import SpotlightCard from "../components/reactbits/SpotlightCard";
+import AnimatedMascot from "../components/animated-mascot";
 
 export default function Portfolio() {
   return (
@@ -51,6 +54,14 @@ export default function Portfolio() {
                 <BitsControl as="a" className="button primary" href="#work">
                   View selected work <Arrow />
                 </BitsControl>
+                <BitsControl
+                  as="a"
+                  className="button secondary"
+                  href={identity.resume}
+                  download="Ayush_Singh_Resume.pdf"
+                >
+                  Download Resume <Download size={16} aria-hidden="true" />
+                </BitsControl>
                 <BitsControl as="a" className="text-link" href="#contact">
                   Let’s talk <Arrow />
                 </BitsControl>
@@ -69,8 +80,11 @@ export default function Portfolio() {
           {[
             "TYPO3",
             "PHP",
+            "Python",
+            "Node.js",
             "Vue",
             "Nuxt",
+            "Next.js",
             "Tailwind",
             "SEO",
             "AEO",
@@ -79,6 +93,15 @@ export default function Portfolio() {
             "Automation",
           ].map((t) => (
             <span key={t}>{t}</span>
+          ))}
+        </div>
+        <div className="metrics-strip" aria-label="Key engineering achievements">
+          {metrics.map((m) => (
+            <div className="metric-item" key={m.label}>
+              <span className="metric-val">{m.value}</span>
+              <span className="metric-label">{m.label}</span>
+              <p className="metric-detail">{m.detail}</p>
+            </div>
           ))}
         </div>
         <AnimatedSection id="build" className="section capabilities-section">
@@ -146,6 +169,35 @@ export default function Portfolio() {
             ))}
           </div>
         </AnimatedSection>
+        <AnimatedSection id="experience" className="section experience-section">
+          <SectionHeading
+            title="Experience & education."
+            text="Chronological engineering journey — from foundational computer science to high-volume ETL pipelines, enterprise TYPO3 architecture, and modern full-stack platforms."
+          />
+          <div className="experience-list">
+            {careerTimeline.map((item) => (
+              <article className="experience-item" key={item.period + item.organization}>
+                <div className="experience-meta">
+                  <span className="experience-period">{item.period}</span>
+                  <span className="experience-badge">{item.type === "work" ? "Industry" : "Education"}</span>
+                  <span className="experience-location">{item.location}</span>
+                </div>
+                <div className="experience-body">
+                  <div className="experience-header">
+                    <BitsText as="h3">{item.role}</BitsText>
+                    <p className="experience-org">{item.organization}</p>
+                  </div>
+                  <ul className="experience-highlights">
+                    {item.highlights.map((h, idx) => (
+                      <li key={idx}>{h}</li>
+                    ))}
+                  </ul>
+                  <Tags values={item.tags} />
+                </div>
+              </article>
+            ))}
+          </div>
+        </AnimatedSection>
         <AnimatedSection
           id="engineering"
           className="section engineering-section"
@@ -204,12 +256,22 @@ export default function Portfolio() {
             text="Exploring the intersection of AI and web engineering — tools that remove repetitive work, improve CMS workflows and make complex systems easier to use."
           />
           <div className="lab-grid">
-            {experiments.map(([title, text, status, tech]) => (
+            {experiments.map(([title, text, status, tech, link]) => (
               <SpotlightCard className="experiment-card" key={title}>
                 <BitsText as="h3">{title}</BitsText>
                 <span className="experiment-status">{status}</span>
                 <p>{text}</p>
                 <p className="lab-tech">{tech}</p>
+                {link ? (
+                  <BitsControl
+                    as="a"
+                    className="text-link"
+                    href={link}
+                    style={{ marginTop: "0.75rem", display: "inline-flex" }}
+                  >
+                    Open interactive guide <Arrow />
+                  </BitsControl>
+                ) : null}
               </SpotlightCard>
             ))}
           </div>
@@ -243,11 +305,12 @@ export default function Portfolio() {
               simpler, reusable systems.
             </p>
             <p>
-              I work extensively with TYPO3 and PHP, with experience in Laravel,
-              WordPress, Joomla, Shopify and PrestaShop. I build modern
-              interfaces with Vue, Nuxt, React, Next.js and Tailwind. More
-              recently, I’m exploring practical applications of AI, RAG and
-              automation to improve CMS workflows and development processes.
+              I work extensively with TYPO3, PHP, Python and Node.js, with
+              experience in Laravel, WordPress, Joomla, Shopify and PrestaShop.
+              I build modern interfaces with Vue, Nuxt, React, Next.js and
+              Tailwind. More recently, I’m exploring practical applications of
+              AI, RAG and automation to improve CMS workflows and development
+              processes.
             </p>
             <div className="about-links">
               <BitsControl as="a" className="text-link" href="#search">
@@ -288,6 +351,17 @@ export default function Portfolio() {
               Let’s talk about the architecture, the problem and what we can
               build.
             </p>
+            <div className="contact-details-block">
+              <p className="contact-detail-line">
+                <span>Location:</span> {identity.location}
+              </p>
+              <p className="contact-detail-line">
+                <span>Direct phone:</span>{" "}
+                <a href={`tel:${identity.phone.replace(/[^+\d]/g, "")}`}>
+                  {identity.phone}
+                </a>
+              </p>
+            </div>
           </div>
           <div className="contact-actions">
             <BitsControl
@@ -301,6 +375,9 @@ export default function Portfolio() {
               {identity.email}
             </a>
             <div className="contact-links">
+              <a href={identity.resume} download="Ayush_Singh_Resume.pdf">
+                Download Resume <Arrow />
+              </a>
               <a href={identity.github}>
                 GitHub <Arrow />
               </a>
@@ -312,6 +389,7 @@ export default function Portfolio() {
         </AnimatedSection>
       </main>
       <Footer />
+      <AnimatedMascot />
     </>
   );
 }

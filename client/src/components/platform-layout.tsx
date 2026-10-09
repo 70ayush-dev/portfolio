@@ -50,7 +50,7 @@ export function Navigation() {
         aria-label="Main navigation"
         className={open ? "nav-open" : ""}
       >
-        {["Work", "Engineering", "Lab", "About"].map((name) => (
+        {["Work", "Experience", "Engineering", "Lab", "About"].map((name) => (
           <a
             key={name}
             href={`/#${name.toLowerCase()}`}
@@ -59,6 +59,14 @@ export function Navigation() {
             {name}
           </a>
         ))}
+        <a
+          href={identity.resume}
+          download="Ayush_Singh_Resume.pdf"
+          className="nav-resume-link"
+          onClick={() => setOpen(false)}
+        >
+          Resume
+        </a>
         <BitsControl
           as="a"
           className="nav-cta"
@@ -83,7 +91,7 @@ export function Footer() {
       <p>
         © {new Date().getFullYear()} Ayush Singh
         <br />
-        Based in India. Working globally.
+        Bhavnagar, Gujarat, India · Working globally.
       </p>
       <div className="footer-links">
         <a href={identity.github}>
@@ -91,6 +99,9 @@ export function Footer() {
         </a>
         <a href={identity.linkedin}>
           <Linkedin size={18} aria-hidden="true" /> LinkedIn
+        </a>
+        <a href={identity.resume} download="Ayush_Singh_Resume.pdf">
+          Resume <Arrow />
         </a>
         <a href={`mailto:${identity.email}`}>
           Email <Arrow />
