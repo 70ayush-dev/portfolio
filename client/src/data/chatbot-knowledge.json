@@ -163,7 +163,7 @@
     "id": "mascot-lab",
     "title": "Animated Mascot Lab (Strobi) & Free Cloudflare Workers AI",
     "url": "https://ayush404.in/lab/mascot/",
-    "content": "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct and mood synchronization.",
+    "content": "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct, mood synchronization, and dual-layer rate limiting.",
     "keywords": [
       "mascot",
       "strobi",
@@ -176,7 +176,8 @@
       "chatbot",
       "ai",
       "cloudflare",
-      "llama"
+      "llama",
+      "rate-limit"
     ]
   },
   {

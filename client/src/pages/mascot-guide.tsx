@@ -87,10 +87,13 @@ Setup requirements:
    - Stream starts receiving chunks: Mascot enters "excited" mood.
    - Stream finishes: Mascot enters "happy" mood.
    - On error: Mascot enters "confused" mood and triggers in-browser keyword fallback.
-4. Grounding: Pass my site's llms-full.txt or knowledge chunks in system prompt so it never hallucinates.
-5. Markdown formatting: Ensure URLs and emails are autolinked.
+4. Dual-Layer Rate Limiting & Anti-Spam:
+   - Server: Sliding window rate limit (10 requests/min per IP via cf-connecting-ip) returning HTTP 429, plus 500-char max message length cap.
+   - Client: 1.5s rapid-fire cooldown and max 12 messages per 2 minutes in sessionStorage (mascot enters "drowsy" mood if throttled).
+5. Grounding: Pass my site's llms-full.txt or knowledge chunks in system prompt so it never hallucinates.
+6. Markdown formatting: Ensure URLs and emails are autolinked.
 
-Show me the complete Cloudflare Worker code and the React integration hook.`,
+Show me the complete Cloudflare Worker code with the rate limiter and the React integration hook.`,
 
   localStudio: `git clone https://github.com/smontlouis/bible-strong-avatar-lab.git
 cd bible-strong-avatar-lab
@@ -444,7 +447,7 @@ export default function MascotGuide() {
             AI Neurons every day).
           </p>
 
-          <div className="guide-paths-grid">
+          <div className="guide-paths-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
             <article className="guide-path-card">
               <span className="guide-path-badge">100% FREE TIER</span>
               <BitsText as="h3">Llama 3.1 on Cloudflare</BitsText>
@@ -470,6 +473,15 @@ export default function MascotGuide() {
               <p>
                 Pre-indexed site knowledge and markdown corpus constrain the LLM to only
                 answer verified portfolio facts with direct clickable links.
+              </p>
+            </article>
+
+            <article className="guide-path-card">
+              <span className="guide-path-badge">ANTI-SPAM &amp; DDOS</span>
+              <BitsText as="h3">Dual-layer rate limit</BitsText>
+              <p>
+                Edge IP sliding window (10 req/min) plus client 1.5s cooldown protect your
+                10,000 free daily neurons from bot spam and exhaustion attacks.
               </p>
             </article>
           </div>

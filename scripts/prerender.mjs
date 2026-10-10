@@ -222,8 +222,8 @@ for (const path of routes) {
         },
         {
           "@type": "HowToStep",
-          name: "Step 5: Connect Free Cloudflare Workers AI Companion",
-          text: "Connect your mascot to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) for real-time streaming answers and synchronize facial moods (thinking, excited, happy).",
+          name: "Step 5: Connect Free Cloudflare Workers AI Companion with Rate Limiting",
+          text: "Connect your mascot to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) with dual-layer IP rate limiting, mood synchronization (thinking, excited, happy), and streaming SSE.",
           url: `${identity.url}${path}#step-5`,
         },
       ],
@@ -418,7 +418,7 @@ ${p.decisions ? `- Key Decisions:\n${p.decisions.map((d) => `  * ${d.title}: ${d
 - Description: Procedural SVG character engine and 20-minute step-by-step implementation guide.
 - Technology: 100% vector SVG and native CSS keyframes (< 4KB payload, zero external runtime libraries, zero layout shift).
 - Features: 23 animated moods (idle, waking, happy, excited, curious, thinking, celebrate, drowsy, sleeping), natural periodic blinking, sleep timer, reduced-motion accessibility.
-- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) with streaming responses and visual facial mood synchronization (thinking -> excited -> happy).
+- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) with streaming responses, visual mood synchronization, dual-layer sliding window IP rate limiting (10 req/min), and client cooldown.
 
 ### Free Custom Domain Email with Cloudflare & Gmail
 - URL: ${identity.url}/lab/custom-domain-email/
@@ -467,8 +467,8 @@ const ragChunks = [
     id: "mascot-lab",
     title: "Animated Mascot Lab (Strobi) & Free Cloudflare Workers AI",
     url: `${identity.url}/lab/mascot/`,
-    content: "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct and mood synchronization.",
-    keywords: ["mascot", "strobi", "animation", "svg", "lab", "avatar", "moods", "character", "chatbot", "ai", "cloudflare", "llama"],
+    content: "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct, mood synchronization, and dual-layer rate limiting.",
+    keywords: ["mascot", "strobi", "animation", "svg", "lab", "avatar", "moods", "character", "chatbot", "ai", "cloudflare", "llama", "rate-limit"],
   },
   {
     id: "custom-domain-email",
