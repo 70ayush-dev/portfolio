@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Sparkles, Volume2, VolumeX, MessageSquare } from "lucide-react";
+import MascotChat from "./mascot-chat";
 
 export type MascotMood =
   | "idle"
@@ -50,6 +51,7 @@ export default function AnimatedMascot({
   const mood = controlledMood !== undefined ? controlledMood : internalMood;
   const [bubbleText, setBubbleText] = useState<string>("Hi! I'm Strobi, Ayush's interactive companion.");
   const [bubbleOpen, setBubbleOpen] = useState(showGuideBubble);
+  const [chatOpen, setChatOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
   const idleTimer = useRef<number | null>(null);
@@ -182,10 +184,32 @@ export default function AnimatedMascot({
       className={`mascot-companion ${minimized ? "mascot-minimized" : ""} mascot-mood-${mood}`}
       aria-label="Interactive Mascot Companion"
     >
+      {/* Interactive Strobi AI Chat */}
+      {interactive && (
+        <MascotChat
+          isOpen={chatOpen}
+          onClose={() => {
+            setChatOpen(false);
+            setInternalMood("idle");
+          }}
+          onMoodChange={(m) => setInternalMood(m)}
+        />
+      )}
+
       {/* Speech bubble */}
-      {bubbleOpen && !minimized && (
+      {!chatOpen && bubbleOpen && !minimized && (
         <div className="mascot-bubble" role="status">
           <p>{bubbleText}</p>
+          <button
+            type="button"
+            className="mascot-bubble-chat-btn"
+            onClick={() => {
+              setChatOpen(true);
+              setBubbleOpen(false);
+            }}
+          >
+            Ask Strobi AI →
+          </button>
           <button
             type="button"
             className="mascot-bubble-close"
@@ -385,10 +409,13 @@ export default function AnimatedMascot({
           <div className="mascot-controls" aria-label="Mascot options">
             <button
               type="button"
-              className="mascot-ctrl-btn"
-              onClick={() => setBubbleOpen(!bubbleOpen)}
-              title={bubbleOpen ? "Mute tips" : "Show tips"}
-              aria-label={bubbleOpen ? "Mute speech bubble" : "Show speech bubble"}
+              className={`mascot-ctrl-btn ${chatOpen ? "active" : ""}`}
+              onClick={() => {
+                setChatOpen(!chatOpen);
+                if (!chatOpen) setBubbleOpen(false);
+              }}
+              title={chatOpen ? "Close chat" : "Chat with Strobi AI"}
+              aria-label={chatOpen ? "Close chat" : "Chat with Strobi AI"}
             >
               <MessageSquare size={13} />
             </button>
