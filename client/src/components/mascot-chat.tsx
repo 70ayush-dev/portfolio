@@ -116,6 +116,7 @@ export default function MascotChat({ isOpen, onClose, onMoodChange }: MascotChat
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastSendTimeRef = useRef<number>(0);
 
   useEffect(() => {
     if (isOpen) {
@@ -135,6 +136,39 @@ export default function MascotChat({ isOpen, onClose, onMoodChange }: MascotChat
   const sendMessage = async (textToSend?: string) => {
     const userText = (textToSend || input).trim();
     if (!userText || isLoading) return;
+
+    // Cooldown check: prevent double-clicks & rapid firing (1.5s gap)
+    const now = Date.now();
+    if (now - lastSendTimeRef.current < 1500) return;
+    lastSendTimeRef.current = now;
+
+    // Client-side spam detection: max 12 messages per 2 minutes in sessionStorage
+    const isSpamming = () => {
+      try {
+        const raw = sessionStorage.getItem("strobi_rate_limit");
+        const history: number[] = raw ? JSON.parse(raw) : [];
+        const recent = history.filter((t) => now - t < 120000);
+        recent.push(now);
+        sessionStorage.setItem("strobi_rate_limit", JSON.stringify(recent));
+        return recent.length > 12;
+      } catch {
+        return false;
+      }
+    };
+
+    if (isSpamming()) {
+      onMoodChange("drowsy");
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (now + 1).toString(),
+          role: "assistant",
+          content:
+            "Whoa, slow down a bit! ⏳ Strobi needs a short breather. Please wait a minute before asking another question, or reach out to Ayush directly at [hello@ayush404.in](mailto:hello@ayush404.in).",
+        },
+      ]);
+      return;
+    }
 
     setInput("");
     const userMsgId = Date.now().toString();
@@ -162,6 +196,21 @@ export default function MascotChat({ isOpen, onClose, onMoodChange }: MascotChat
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: apiMessages }),
       });
+
+      if (response.status === 429) {
+        onMoodChange("drowsy");
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: assistantMsgId,
+            role: "assistant",
+            content:
+              "Whoa, slow down! ⏳ Server rate limit reached. Strobi is taking a quick 60-second break. In the meantime, you can reach Ayush directly at [hello@ayush404.in](mailto:hello@ayush404.in)!",
+          },
+        ]);
+        setIsLoading(false);
+        return;
+      }
 
       if (!response.ok || !response.body) {
         throw new Error(`Worker status ${response.status}`);
