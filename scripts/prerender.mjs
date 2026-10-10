@@ -12,7 +12,13 @@ const escape = (text) =>
     .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
-const routes = ["/", "/lab/mascot/", ...projects.map((p) => `/work/${p.slug}/`), "/404.html"];
+const routes = [
+  "/",
+  "/lab/mascot/",
+  "/lab/custom-domain-email/",
+  ...projects.map((p) => `/work/${p.slug}/`),
+  "/404.html",
+];
 const person = {
   "@type": "Person",
   "@id": `${identity.url}/#person`,
@@ -52,18 +58,23 @@ const person = {
 for (const path of routes) {
   const project = projects.find((p) => path === `/work/${p.slug}/`);
   const isMascot = path === "/lab/mascot/";
+  const isEmailGuide = path === "/lab/custom-domain-email/";
   const title = project
     ? `${project.title} — Ayush Singh | Engineering Case Study`
     : isMascot
       ? "Make Your Own Animated Mascot in 20 Minutes — Ayush Singh Lab"
-      : path === "/404.html"
-        ? "Page not found — Ayush404"
-        : "Ayush Singh — Web Platform Engineer | TYPO3, PHP, Vue, SEO & AI";
+      : isEmailGuide
+        ? "Free Custom Domain Email with Cloudflare & Gmail Guide — Ayush Singh Lab"
+        : path === "/404.html"
+          ? "Page not found — Ayush404"
+          : "Ayush Singh — Web Platform Engineer | TYPO3, PHP, Vue, SEO & AI";
   const description =
     project?.description ||
     (isMascot
-      ? "Step-by-step guide to building interactive, procedural SVG animated mascots for web platforms."
-      : "Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, SEO, AEO, GEO, AI integrations and web automation.");
+      ? "Step-by-step guide to building interactive, procedural SVG animated mascots for web platforms with Cloudflare Workers AI companion integration."
+      : isEmailGuide
+        ? "Step-by-step fieldguide to set up professional custom domain email (hello@yourdomain.com) for $0/mo forever using Cloudflare Email Routing, SPF/DMARC and Gmail."
+        : "Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, SEO, AEO, GEO, AI integrations and web automation.");
   const graph = [
     person,
     {
@@ -209,6 +220,104 @@ for (const path of routes) {
           text: "Mount the procedural mascot component in React and bind interaction states, blinking intervals, and mood reaction controller hooks.",
           url: `${identity.url}${path}#step-4`,
         },
+        {
+          "@type": "HowToStep",
+          name: "Step 5: Connect Free Cloudflare Workers AI Companion",
+          text: "Connect your mascot to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) for real-time streaming answers and synchronize facial moods (thinking, excited, happy).",
+          url: `${identity.url}${path}#step-5`,
+        },
+      ],
+    });
+  } else if (isEmailGuide) {
+    graph.push({
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: identity.url + "/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Lab",
+          item: identity.url + "/#lab",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Free Custom Domain Email Guide",
+          item: identity.url + path,
+        },
+      ],
+    });
+    graph.push({
+      "@type": "TechArticle",
+      headline: title,
+      description,
+      url: identity.url + path,
+      author: { "@id": person["@id"] },
+      proficiencyLevel: "Beginner",
+      dependencies: "Cloudflare Email Routing, Gmail, DNS, SPF, DKIM, DMARC",
+      keywords: "Cloudflare Email Routing, Free Custom Domain Email, Gmail SMTP, Professional Email, SPF DMARC",
+    });
+    graph.push({
+      "@type": "HowTo",
+      name: "How to Get Free Custom Domain Email with Cloudflare & Gmail",
+      description,
+      totalTime: "PT10M",
+      tool: [
+        {
+          "@type": "HowToTool",
+          name: "Cloudflare Dashboard",
+        },
+        {
+          "@type": "HowToTool",
+          name: "Google Account & Gmail",
+        },
+      ],
+      supply: [
+        {
+          "@type": "HowToSupply",
+          name: "Custom Domain",
+        },
+        {
+          "@type": "HowToSupply",
+          name: "Free Personal Gmail Account",
+        },
+      ],
+      step: [
+        {
+          "@type": "HowToStep",
+          name: "Step 1: Enable Cloudflare Email Routing & Apply DNS Records",
+          text: "Open Cloudflare Dashboard -> Email -> Email Routing, auto-apply the 3 MX records (route1/2/3.mx.cloudflare.net) and SPF TXT record.",
+          url: `${identity.url}${path}#step-1`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 2: Configure Custom Address & Verify Gmail Destination",
+          text: "Create custom addresses (e.g. hello@yourdomain.com) and forward them to your personal Gmail inbox after clicking the verification email.",
+          url: `${identity.url}${path}#step-2`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 3: Generate Google 16-Character App Password",
+          text: "In Google Account Security (with 2-Step Verification enabled), generate a dedicated 16-character App Password for SMTP authentication.",
+          url: `${identity.url}${path}#step-3`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 4: Configure Gmail 'Send Mail As' via SMTP",
+          text: "In Gmail Settings -> Accounts and Import, add your custom domain email with host smtp.gmail.com, port 587 (TLS), and your App Password for free two-way sending.",
+          url: `${identity.url}${path}#step-4`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 5: Enforce Combined SPF & DMARC DNS Records",
+          text: "Publish combined SPF TXT record allowing both Cloudflare routing and Google SMTP, plus a DMARC policy record for 10/10 inbox deliverability.",
+          url: `${identity.url}${path}#step-5`,
+        },
       ],
     });
   }
@@ -249,7 +358,8 @@ This is Ayush's professional portfolio. Project pages describe engineering work 
 - [Homepage](${identity.url}/): Professional identity, capabilities, selected work and contact information.
 - [Engineering](${identity.url}/#engineering): Technical skills and platform engineering expertise.
 - [Search & AI Visibility](${identity.url}/#search): Technical SEO, AEO and GEO capabilities and services.
-- [Animated Mascot Lab](${identity.url}/lab/mascot/): Step-by-step 20-minute guide and procedural SVG character engine with 23 animated moods.
+- [Animated Mascot Lab](${identity.url}/lab/mascot/): Step-by-step 20-minute guide, procedural SVG character engine with 23 animated moods, and free Cloudflare Workers AI companion integration.
+- [Free Custom Domain Email Guide](${identity.url}/lab/custom-domain-email/): Step-by-step 10-minute fieldguide to receiving and sending custom domain email (hello@yourdomain.com) for $0/mo forever using Cloudflare Email Routing and Gmail.
 
 ## Case studies
 
@@ -308,7 +418,13 @@ ${p.decisions ? `- Key Decisions:\n${p.decisions.map((d) => `  * ${d.title}: ${d
 - Description: Procedural SVG character engine and 20-minute step-by-step implementation guide.
 - Technology: 100% vector SVG and native CSS keyframes (< 4KB payload, zero external runtime libraries, zero layout shift).
 - Features: 23 animated moods (idle, waking, happy, excited, curious, thinking, celebrate, drowsy, sleeping), natural periodic blinking, sleep timer, reduced-motion accessibility.
-- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI with streaming responses.
+- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) with streaming responses and visual facial mood synchronization (thinking -> excited -> happy).
+
+### Free Custom Domain Email with Cloudflare & Gmail
+- URL: ${identity.url}/lab/custom-domain-email/
+- Description: Step-by-step fieldguide to setting up professional custom domain email (hello@yourdomain.com) for $0/mo forever without paying $72+/year for Google Workspace.
+- Architecture: Cloudflare Email Routing handles inbound MX routing and anti-spam; forwards to personal Gmail. Outbound mail sends via Gmail SMTP (smtp.gmail.com:587) with a dedicated Google App Password.
+- Security: Combined SPF (include:_spf.mx.cloudflare.net include:_spf.google.com) and DMARC enforcement (p=none / p=quarantine) for 10/10 deliverability.
 
 ## Frequently Asked Questions (FAQs)
 ${faqs.map(([q, a]) => `### Q: ${q}\nA: ${a}`).join("\n\n")}
@@ -349,10 +465,17 @@ const ragChunks = [
   })),
   {
     id: "mascot-lab",
-    title: "Animated Mascot Lab (Strobi)",
+    title: "Animated Mascot Lab (Strobi) & Free Cloudflare Workers AI",
     url: `${identity.url}/lab/mascot/`,
-    content: "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated RAG chatbot powered by Cloudflare Workers AI.",
-    keywords: ["mascot", "strobi", "animation", "svg", "lab", "avatar", "moods", "character", "chatbot"],
+    content: "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct and mood synchronization.",
+    keywords: ["mascot", "strobi", "animation", "svg", "lab", "avatar", "moods", "character", "chatbot", "ai", "cloudflare", "llama"],
+  },
+  {
+    id: "custom-domain-email",
+    title: "Free Custom Domain Email with Cloudflare & Gmail Guide",
+    url: `${identity.url}/lab/custom-domain-email/`,
+    content: "Complete guide to getting professional custom domain email (hello@yourdomain.com) for $0/year using Cloudflare Email Routing and Gmail SMTP with App Passwords. Includes SPF, DKIM, and DMARC deliverability hardening.",
+    keywords: ["email", "domain", "cloudflare", "gmail", "smtp", "free", "routing", "dmarc", "spf", "mx", "custom"],
   },
   ...faqs.map(([q, a], idx) => ({
     id: `faq-${idx}`,

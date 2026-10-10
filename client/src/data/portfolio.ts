@@ -340,6 +340,13 @@ export const experiments = [
     "/lab/mascot/",
   ],
   [
+    "Free Custom Domain Email",
+    "Receive and send from hello@yourdomain.com for $0/mo forever with Cloudflare Email Routing & Gmail.",
+    "FEATURED GUIDE",
+    "Cloudflare / DNS / SMTP / Security",
+    "/lab/custom-domain-email/",
+  ],
+  [
     "TYPO3 × AI Migration Assistant",
     "AI-assisted legacy content analysis and mapping.",
     "EXPERIMENT",

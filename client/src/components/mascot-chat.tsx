@@ -37,7 +37,35 @@ function generateLocalAnswer(query: string): string {
   const q = query.toLowerCase().trim();
 
   // Fast direct matches for common questions
-  if (q.includes("contact") || q.includes("hire") || q.includes("email") || q.includes("reach") || q.includes("touch")) {
+  if (
+    q.includes("domain email") ||
+    q.includes("email routing") ||
+    q.includes("email guide") ||
+    q.includes("cloudflare email") ||
+    q.includes("custom email")
+  ) {
+    return `Ayush published a complete fieldguide on **[How to Get Free Custom Domain Email with Cloudflare & Gmail](/lab/custom-domain-email/)**.
+It covers setting up incoming routing, free two-way sending via Gmail SMTP with Google App Passwords, and hardening SPF/DMARC for 10/10 inbox deliverability with zero monthly fees!`;
+  }
+
+  if (
+    q.includes("mascot ai") ||
+    q.includes("cloudflare ai") ||
+    q.includes("free ai") ||
+    q.includes("llama")
+  ) {
+    return `You can connect an animated SVG mascot to Cloudflare Workers AI for free streaming intelligence using \`@cf/meta/llama-3.1-8b-instruct\`.
+Check out the full instructions in the **[Animated Mascot Lab Guide](/lab/mascot/)**!`;
+  }
+
+  if (
+    q.includes("contact") ||
+    q.includes("hire") ||
+    q.includes("reach") ||
+    q.includes("touch") ||
+    q.includes("email ayush") ||
+    (q.includes("email") && !q.includes("guide") && !q.includes("setup"))
+  ) {
     return `You can reach Ayush directly via email at **[${identity.email}](mailto:${identity.email})** or connect on **[LinkedIn](${identity.linkedin})**. He is based in ${identity.location} and available for web platform engineering and technical consultations.`;
   }
 

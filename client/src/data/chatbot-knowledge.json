@@ -161,9 +161,9 @@
   },
   {
     "id": "mascot-lab",
-    "title": "Animated Mascot Lab (Strobi)",
+    "title": "Animated Mascot Lab (Strobi) & Free Cloudflare Workers AI",
     "url": "https://ayush404.in/lab/mascot/",
-    "content": "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated RAG chatbot powered by Cloudflare Workers AI.",
+    "content": "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated free RAG chatbot powered by Cloudflare Workers AI with Llama 3.1 8B Instruct and mood synchronization.",
     "keywords": [
       "mascot",
       "strobi",
@@ -173,7 +173,29 @@
       "avatar",
       "moods",
       "character",
-      "chatbot"
+      "chatbot",
+      "ai",
+      "cloudflare",
+      "llama"
+    ]
+  },
+  {
+    "id": "custom-domain-email",
+    "title": "Free Custom Domain Email with Cloudflare & Gmail Guide",
+    "url": "https://ayush404.in/lab/custom-domain-email/",
+    "content": "Complete guide to getting professional custom domain email (hello@yourdomain.com) for $0/year using Cloudflare Email Routing and Gmail SMTP with App Passwords. Includes SPF, DKIM, and DMARC deliverability hardening.",
+    "keywords": [
+      "email",
+      "domain",
+      "cloudflare",
+      "gmail",
+      "smtp",
+      "free",
+      "routing",
+      "dmarc",
+      "spf",
+      "mx",
+      "custom"
     ]
   },
   {

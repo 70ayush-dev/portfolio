@@ -77,6 +77,21 @@ Reactions:
 
 Rules: no layout jumps, use tap instead of hover on phones, and turn reactions off if the visitor prefers reduced motion. Show me the code and a short list of what triggers what.`,
 
+  cloudflareAi: `Connect my animated mascot to a free streaming AI chatbot powered by Cloudflare Workers AI.
+
+Setup requirements:
+1. Model: Cloudflare Workers AI '@cf/meta/llama-3.1-8b-instruct' (10,000 free neurons/day on free tier).
+2. Backend: Cloudflare Worker on route '/api/chat' returning Server-Sent Events (SSE) text/event-stream.
+3. Mood Synchronization:
+   - User sends prompt: Mascot enters "thinking" mood.
+   - Stream starts receiving chunks: Mascot enters "excited" mood.
+   - Stream finishes: Mascot enters "happy" mood.
+   - On error: Mascot enters "confused" mood and triggers in-browser keyword fallback.
+4. Grounding: Pass my site's llms-full.txt or knowledge chunks in system prompt so it never hallucinates.
+5. Markdown formatting: Ensure URLs and emails are autolinked.
+
+Show me the complete Cloudflare Worker code and the React integration hook.`,
+
   localStudio: `git clone https://github.com/smontlouis/bible-strong-avatar-lab.git
 cd bible-strong-avatar-lab
 npm install -g pnpm
@@ -417,9 +432,62 @@ export default function MascotGuide() {
           </div>
         </section>
 
-        {/* 06: Good to know & Credits */}
+        {/* 06: Free Cloudflare AI Companion Integration */}
         <section className="section guide-section">
-          <div className="guide-step-tag">06 / SPECIFICATIONS &amp; CREDITS</div>
+          <div className="guide-step-tag">06 / FREE CLOUDFLARE AI INTEGRATION</div>
+          <BitsText as="h2">Turn your mascot into a grounded AI companion.</BitsText>
+          <p className="guide-body">
+            Why stop at static movements? By connecting your procedural SVG mascot to{" "}
+            <strong>Cloudflare Workers AI</strong>, your character can hold real-time
+            streaming conversations, answer questions strictly about your website, and
+            react visually with synchronized facial moods — completely free (10,000 free
+            AI Neurons every day).
+          </p>
+
+          <div className="guide-paths-grid">
+            <article className="guide-path-card">
+              <span className="guide-path-badge">100% FREE TIER</span>
+              <BitsText as="h3">Llama 3.1 on Cloudflare</BitsText>
+              <p>
+                Powered by <code>@cf/meta/llama-3.1-8b-instruct</code> running directly
+                on Cloudflare’s global edge network with sub-second time-to-first-token.
+              </p>
+            </article>
+
+            <article className="guide-path-card featured">
+              <span className="guide-path-badge">MOOD SYNCHRONIZATION</span>
+              <BitsText as="h3">Visual state binding</BitsText>
+              <p>
+                The mascot visually switches to <code>thinking</code> while awaiting tokens,{" "}
+                <code>excited</code> when streaming starts, and <code>happy</code> upon
+                completion.
+              </p>
+            </article>
+
+            <article className="guide-path-card">
+              <span className="guide-path-badge">ZERO HALLUCINATIONS</span>
+              <BitsText as="h3">Grounded RAG architecture</BitsText>
+              <p>
+                Pre-indexed site knowledge and markdown corpus constrain the LLM to only
+                answer verified portfolio facts with direct clickable links.
+              </p>
+            </article>
+          </div>
+
+          <div className="code-block-card" style={{ marginTop: "32px" }}>
+            <div className="code-block-header">
+              <span>PROMPT 6 · CLOUDFLARE WORKERS AI + MASCOT INTEGRATION PROMPT</span>
+              <CopyButton text={PROMPTS.cloudflareAi} />
+            </div>
+            <pre className="code-block-content">
+              <code>{PROMPTS.cloudflareAi}</code>
+            </pre>
+          </div>
+        </section>
+
+        {/* 07: Good to know & Credits */}
+        <section className="section guide-section">
+          <div className="guide-step-tag">07 / SPECIFICATIONS &amp; CREDITS</div>
           <BitsText as="h2">Engineering details.</BitsText>
 
           <div className="specs-grid">

@@ -107,7 +107,13 @@
 - Description: Procedural SVG character engine and 20-minute step-by-step implementation guide.
 - Technology: 100% vector SVG and native CSS keyframes (< 4KB payload, zero external runtime libraries, zero layout shift).
 - Features: 23 animated moods (idle, waking, happy, excited, curious, thinking, celebrate, drowsy, sleeping), natural periodic blinking, sleep timer, reduced-motion accessibility.
-- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI with streaming responses.
+- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI (@cf/meta/llama-3.1-8b-instruct) with streaming responses and visual facial mood synchronization (thinking -> excited -> happy).
+
+### Free Custom Domain Email with Cloudflare & Gmail
+- URL: https://ayush404.in/lab/custom-domain-email/
+- Description: Step-by-step fieldguide to setting up professional custom domain email (hello@yourdomain.com) for $0/mo forever without paying $72+/year for Google Workspace.
+- Architecture: Cloudflare Email Routing handles inbound MX routing and anti-spam; forwards to personal Gmail. Outbound mail sends via Gmail SMTP (smtp.gmail.com:587) with a dedicated Google App Password.
+- Security: Combined SPF (include:_spf.mx.cloudflare.net include:_spf.google.com) and DMARC enforcement (p=none / p=quarantine) for 10/10 deliverability.
 
 ## Frequently Asked Questions (FAQs)
 ### Q: Does Ayush provide SEO, AEO and GEO services?
