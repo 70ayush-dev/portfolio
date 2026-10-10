@@ -274,7 +274,7 @@ export default function MascotGuide() {
           </p>
 
           <div className="guide-steps-list">
-            <div className="guide-step-item">
+            <div id="step-1" className="guide-step-item">
               <span className="step-num">1</span>
               <div>
                 <BitsText as="h3">Pick your starter</BitsText>
@@ -285,7 +285,7 @@ export default function MascotGuide() {
               </div>
             </div>
 
-            <div className="guide-step-item">
+            <div id="step-2" className="guide-step-item">
               <span className="step-num">2</span>
               <div>
                 <BitsText as="h3">Shape &amp; color</BitsText>
@@ -296,7 +296,7 @@ export default function MascotGuide() {
               </div>
             </div>
 
-            <div className="guide-step-item">
+            <div id="step-3" className="guide-step-item">
               <span className="step-num">3</span>
               <div>
                 <BitsText as="h3">Eyes do most of the acting</BitsText>
@@ -321,7 +321,7 @@ export default function MascotGuide() {
         </section>
 
         {/* 04: Put it on your website */}
-        <section className="section guide-section">
+        <section id="step-4" className="section guide-section">
           <div className="guide-step-tag">04 / CODE INTEGRATION</div>
           <BitsText as="h2">Put it on your website.</BitsText>
           <p className="guide-body">

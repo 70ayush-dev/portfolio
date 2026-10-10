@@ -129,6 +129,88 @@ for (const path of routes) {
         acceptedAnswer: { "@type": "Answer", text: a },
       })),
     });
+  } else if (isMascot) {
+    graph.push({
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: identity.url + "/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Lab",
+          item: identity.url + "/#lab",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Animated Mascot Guide",
+          item: identity.url + path,
+        },
+      ],
+    });
+    graph.push({
+      "@type": "TechArticle",
+      headline: title,
+      description,
+      url: identity.url + path,
+      author: { "@id": person["@id"] },
+      proficiencyLevel: "Beginner",
+      dependencies: "React, SVG",
+      keywords: "Animated Mascot, Procedural SVG, React Animation, Character Design",
+    });
+    graph.push({
+      "@type": "HowTo",
+      name: "Make Your Own Animated Mascot in 20 Minutes",
+      description,
+      totalTime: "PT20M",
+      tool: [
+        {
+          "@type": "HowToTool",
+          name: "Avatar Lab Studio",
+        },
+      ],
+      supply: [
+        {
+          "@type": "HowToSupply",
+          name: "React",
+        },
+        {
+          "@type": "HowToSupply",
+          name: "SVG",
+        },
+      ],
+      step: [
+        {
+          "@type": "HowToStep",
+          name: "Step 1: Choose Starter Shape",
+          text: "Select a starter body shape such as Strobi (round ball), Freddy (block with ears), Citrus (drop), Nova (bean), or Grok bot in the Avatar Lab Studio canvas.",
+          url: `${identity.url}${path}#step-1`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 2: Customize Eyes & Geometry",
+          text: "Configure body colors, eye shapes, width, height, spacing, and tilt to give the mascot unique facial expressions and personality.",
+          url: `${identity.url}${path}#step-2`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 3: Export SVG or JSON Definition",
+          text: "Export the designed character definition as clean, lightweight SVG markup or an avatar JSON definition bundle.",
+          url: `${identity.url}${path}#step-3`,
+        },
+        {
+          "@type": "HowToStep",
+          name: "Step 4: Integrate in React with Animation States",
+          text: "Mount the procedural mascot component in React and bind interaction states, blinking intervals, and mood reaction controller hooks.",
+          url: `${identity.url}${path}#step-4`,
+        },
+      ],
+    });
   }
   const seo = `<title>${escape(title)}</title>\n<meta name="description" content="${escape(description)}" />\n<link rel="canonical" href="${identity.url + path}" />\n<meta name="robots" content="${path === "/404.html" ? "noindex" : "index, follow, max-image-preview:large"}" />\n<meta property="og:title" content="${escape(title)}" />\n<meta property="og:description" content="${escape(description)}" />\n<meta property="og:type" content="website" />\n<meta property="og:url" content="${identity.url + path}" />\n<meta property="og:image" content="${identity.url}/og-image.png" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="630" />\n<meta property="og:image:type" content="image/png" />\n<meta property="og:image:alt" content="Ayush Singh — Web Platform Engineer. TYPO3, PHP, Vue, Nuxt, SEO, AEO, GEO and AI." />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${escape(title)}" />\n<meta name="twitter:description" content="${escape(description)}" />\n<meta name="twitter:image" content="${identity.url}/og-image.png" />\n<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replaceAll("<", "\\u003c")}</script>`;
   const html = template
