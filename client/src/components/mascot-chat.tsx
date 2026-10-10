@@ -380,56 +380,62 @@ export default function MascotChat({ isOpen, onClose, onMoodChange }: MascotChat
 // Lightweight Markdown & Autolink Formatter
 function formatMarkdown(text: string): string {
   if (!text) return "";
+
+  // 1. Sanitize HTML entities
   let html = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Bold **text**
+  // 2. Bold **text**
   html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-  const placeholders: string[] = [];
+  // 3. Inline code `code`
+  html = html.replace(/`([^`]+)`/g, '<code class="chat-code">$1</code>');
 
-  // 1. Markdown Links [label](url)
+  const links: string[] = [];
+
+  // 4. Markdown links [label](url)
   html = html.replace(/\[(.*?)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, (_, label, url) => {
-    const idx = placeholders.length;
+    const idx = links.length;
     const isInternal = url.startsWith("/");
     const target = isInternal ? "" : ' target="_blank" rel="noopener noreferrer"';
-    placeholders.push(`<a href="${url}"${target} class="chat-link">${label}</a>`);
+    links.push(`<a href="${url}"${target} class="chat-link">${label}</a>`);
     return `___LINK_TOKEN_${idx}___`;
   });
 
-  // 2. Bare URLs (https:// or http://)
-  html = html.replace(/(https?:\/\/[^\s<)]+)/g, (url) => {
-    const cleanUrl = url.replace(/[.,;!)]+$/, "");
-    const trailing = url.slice(cleanUrl.length);
-    const idx = placeholders.length;
-    placeholders.push(
-      `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="chat-link">${cleanUrl}</a>`
+  // 5. Bare URLs (https://, http://, or www.)
+  html = html.replace(/\b((?:https?:\/\/|www\.)[^\s<)]+)/gi, (match) => {
+    const cleanUrl = match.replace(/[.,;!?)>]+$/, "");
+    const trailing = match.slice(cleanUrl.length);
+    const href = cleanUrl.startsWith("www.") ? `https://${cleanUrl}` : cleanUrl;
+    const idx = links.length;
+    links.push(
+      `<a href="${href}" target="_blank" rel="noopener noreferrer" class="chat-link">${cleanUrl}</a>`
     );
     return `___LINK_TOKEN_${idx}___${trailing}`;
   });
 
-  // 3. Email addresses (e.g. hello@ayush404.in)
-  html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, (email) => {
-    const cleanEmail = email.replace(/[.,;!)]+$/, "");
+  // 6. Email addresses
+  html = html.replace(/\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/gi, (email) => {
+    const cleanEmail = email.replace(/[.,;!?)>]+$/, "");
     const trailing = email.slice(cleanEmail.length);
-    const idx = placeholders.length;
-    placeholders.push(
+    const idx = links.length;
+    links.push(
       `<a href="mailto:${cleanEmail}" class="chat-link">${cleanEmail}</a>`
     );
     return `___LINK_TOKEN_${idx}___${trailing}`;
   });
 
-  // Restore placeholders
-  placeholders.forEach((tag, idx) => {
-    html = html.replace(`___LINK_TOKEN_${idx}___`, tag);
-  });
+  // 7. Restore links safely
+  for (let i = 0; i < links.length; i++) {
+    html = html.split(`___LINK_TOKEN_${i}___`).join(links[i]);
+  }
 
-  // Bullet points
-  html = html.replace(/^[•\-\*] (.*$)/gm, '<span class="chat-bullet">•</span> $1');
+  // 8. Bullet points (* or - or • at start of line)
+  html = html.replace(/^\s*[\*\-\•]\s+(.*$)/gm, '<span class="chat-bullet">•</span> $1');
 
-  // Line breaks
+  // 9. Newlines to <br />
   html = html.replace(/\n/g, "<br />");
 
   return html;

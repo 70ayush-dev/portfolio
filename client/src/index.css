@@ -2122,22 +2122,32 @@ body,
   margin: 0;
 }
 
+.mascot-msg-content a,
 .mascot-msg-content .chat-link {
-  color: var(--color-accent);
-  text-decoration: underline;
+  color: var(--color-accent) !important;
+  text-decoration: underline !important;
   text-underline-offset: 3px;
-  font-weight: 500;
+  font-weight: 600;
   word-break: break-all;
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: auto !important;
   transition: opacity 0.2s;
 }
 
-.mascot-msg-content .chat-link:hover {
-  opacity: 0.8;
+:root[data-theme="dark"] .mascot-msg-content a,
+:root[data-theme="dark"] .mascot-msg-content .chat-link {
+  color: #60a5fa !important;
 }
 
+.mascot-msg-content a:hover,
+.mascot-msg-content .chat-link:hover {
+  opacity: 0.8;
+  text-decoration: underline !important;
+}
+
+.user-msg .mascot-msg-content a,
 .user-msg .mascot-msg-content .chat-link {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .mascot-msg-content .chat-bullet {
