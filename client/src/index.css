@@ -2125,7 +2125,15 @@ body,
 .mascot-msg-content .chat-link {
   color: var(--color-accent);
   text-decoration: underline;
+  text-underline-offset: 3px;
   font-weight: 500;
+  word-break: break-all;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.mascot-msg-content .chat-link:hover {
+  opacity: 0.8;
 }
 
 .user-msg .mascot-msg-content .chat-link {

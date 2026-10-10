@@ -377,7 +377,7 @@ export default function MascotChat({ isOpen, onClose, onMoodChange }: MascotChat
   );
 }
 
-// Lightweight Markdown Formatter for links, bold, lists, and line breaks
+// Lightweight Markdown & Autolink Formatter
 function formatMarkdown(text: string): string {
   if (!text) return "";
   let html = text
@@ -388,14 +388,46 @@ function formatMarkdown(text: string): string {
   // Bold **text**
   html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-  // Links [text](url)
-  html = html.replace(
-    /\[(.*?)\]\((.*?)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1</a>'
-  );
+  const placeholders: string[] = [];
+
+  // 1. Markdown Links [label](url)
+  html = html.replace(/\[(.*?)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, (_, label, url) => {
+    const idx = placeholders.length;
+    const isInternal = url.startsWith("/");
+    const target = isInternal ? "" : ' target="_blank" rel="noopener noreferrer"';
+    placeholders.push(`<a href="${url}"${target} class="chat-link">${label}</a>`);
+    return `___LINK_TOKEN_${idx}___`;
+  });
+
+  // 2. Bare URLs (https:// or http://)
+  html = html.replace(/(https?:\/\/[^\s<)]+)/g, (url) => {
+    const cleanUrl = url.replace(/[.,;!)]+$/, "");
+    const trailing = url.slice(cleanUrl.length);
+    const idx = placeholders.length;
+    placeholders.push(
+      `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="chat-link">${cleanUrl}</a>`
+    );
+    return `___LINK_TOKEN_${idx}___${trailing}`;
+  });
+
+  // 3. Email addresses (e.g. hello@ayush404.in)
+  html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, (email) => {
+    const cleanEmail = email.replace(/[.,;!)]+$/, "");
+    const trailing = email.slice(cleanEmail.length);
+    const idx = placeholders.length;
+    placeholders.push(
+      `<a href="mailto:${cleanEmail}" class="chat-link">${cleanEmail}</a>`
+    );
+    return `___LINK_TOKEN_${idx}___${trailing}`;
+  });
+
+  // Restore placeholders
+  placeholders.forEach((tag, idx) => {
+    html = html.replace(`___LINK_TOKEN_${idx}___`, tag);
+  });
 
   // Bullet points
-  html = html.replace(/^• (.*$)/gm, '<span class="chat-bullet">•</span> $1');
+  html = html.replace(/^[•\-\*] (.*$)/gm, '<span class="chat-bullet">•</span> $1');
 
   // Line breaks
   html = html.replace(/\n/g, "<br />");
