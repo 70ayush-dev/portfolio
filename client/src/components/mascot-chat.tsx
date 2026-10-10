@@ -475,9 +475,10 @@ function formatMarkdown(text: string): string {
   // 4. Markdown links [label](url)
   html = html.replace(/\[(.*?)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, (_, label, url) => {
     const idx = links.length;
-    const isInternal = url.startsWith("/");
+    const safeUrl = url.replace(/["'<>]/g, "");
+    const isInternal = safeUrl.startsWith("/");
     const target = isInternal ? "" : ' target="_blank" rel="noopener noreferrer"';
-    links.push(`<a href="${url}"${target} class="chat-link">${label}</a>`);
+    links.push(`<a href="${safeUrl}"${target} class="chat-link">${label}</a>`);
     return `___LINK_TOKEN_${idx}___`;
   });
 
@@ -485,17 +486,18 @@ function formatMarkdown(text: string): string {
   html = html.replace(/\b((?:https?:\/\/|www\.)[^\s<)]+)/gi, (match) => {
     const cleanUrl = match.replace(/[.,;!?)>]+$/, "");
     const trailing = match.slice(cleanUrl.length);
-    const href = cleanUrl.startsWith("www.") ? `https://${cleanUrl}` : cleanUrl;
+    const safeUrl = cleanUrl.replace(/["'<>]/g, "");
+    const href = safeUrl.startsWith("www.") ? `https://${safeUrl}` : safeUrl;
     const idx = links.length;
     links.push(
-      `<a href="${href}" target="_blank" rel="noopener noreferrer" class="chat-link">${cleanUrl}</a>`
+      `<a href="${href}" target="_blank" rel="noopener noreferrer" class="chat-link">${safeUrl}</a>`
     );
     return `___LINK_TOKEN_${idx}___${trailing}`;
   });
 
   // 6. Email addresses
   html = html.replace(/\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/gi, (email) => {
-    const cleanEmail = email.replace(/[.,;!?)>]+$/, "");
+    const cleanEmail = email.replace(/[.,;!?)>]+$/, "").replace(/["'<>]/g, "");
     const trailing = email.slice(cleanEmail.length);
     const idx = links.length;
     links.push(
