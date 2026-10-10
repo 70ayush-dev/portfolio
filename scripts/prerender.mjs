@@ -263,6 +263,109 @@ ${projects.map((p) => `- [${p.title}](${identity.url}/work/${p.slug}/): ${p.desc
 This file provides a curated site overview. It does not set crawling permissions or training policies.
 `,
 );
+
+// Comprehensive Full Markdown Corpus for RAG & AI Assistants
+const fullKnowledgeMarkdown = `# Ayush Singh — Web Platform Engineering Knowledge Base
+
+## Professional Identity
+- Name: ${identity.name}
+- Role: ${identity.role}
+- Email: ${identity.email}
+- Location: ${identity.location}
+- Portfolio Website: ${identity.url}
+- GitHub: ${identity.github}
+- LinkedIn: ${identity.linkedin}
+- Summary: Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, Technical SEO, AEO, GEO, AI integrations, and web automation.
+
+## Core Technical Competencies
+- CMS & Backend: Deep TYPO3 expertise (v11–v14), PHP 8.x, Python, Node.js, Firebase Auth & Firestore, Laravel, WordPress.
+- Frontend Architecture: Vue 3, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, procedural SVG graphics.
+- Search & AI Visibility: Technical SEO, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization), Schema.org JSON-LD structured data, semantic HTML5, Core Web Vitals optimization.
+- AI Automation & Data: Real estate AI email assistant automation, ETL data transformation pipelines (300k+ records), RAG assistants.
+
+## Case Studies & Engineering Architecture
+${projects
+  .map(
+    (p) => `### ${p.title}
+- Subtitle: ${p.subtitle}
+- URL: ${identity.url}/work/${p.slug}/
+- Live Demo: ${p.liveUrl || "Client platform"}
+- Role: ${p.role || "Lead Platform Engineer"}
+- Technologies: ${p.technologies.join(", ")}
+- Flow: ${p.flow.join(" → ")}
+- Challenge: ${p.challenge}
+- Approach: ${p.approach}
+- Results: ${p.result}
+${p.decisions ? `- Key Decisions:\n${p.decisions.map((d) => `  * ${d.title}: ${d.description}`).join("\n")}` : ""}
+- Search Architecture: ${p.searchArchitecture || "Structured schema.org graph and page metadata."}
+`,
+  )
+  .join("\n")}
+
+## Lab Experiments
+### Animated Mascot Lab (Strobi)
+- URL: ${identity.url}/lab/mascot/
+- Description: Procedural SVG character engine and 20-minute step-by-step implementation guide.
+- Technology: 100% vector SVG and native CSS keyframes (< 4KB payload, zero external runtime libraries, zero layout shift).
+- Features: 23 animated moods (idle, waking, happy, excited, curious, thinking, celebrate, drowsy, sleeping), natural periodic blinking, sleep timer, reduced-motion accessibility.
+- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI with streaming responses.
+
+## Frequently Asked Questions (FAQs)
+${faqs.map(([q, a]) => `### Q: ${q}\nA: ${a}`).join("\n\n")}
+`;
+
+await writeFile("dist/llms-full.txt", fullKnowledgeMarkdown);
+await writeFile("client/public/llms-full.txt", fullKnowledgeMarkdown);
+
+// Structured RAG Chunks JSON Index
+const ragChunks = [
+  {
+    id: "identity",
+    title: "About Ayush Singh & Contact Details",
+    url: `${identity.url}/`,
+    content: `Ayush Singh is a Web Platform Engineer based in ${identity.location}. Specializing in TYPO3, PHP, Vue/Nuxt, SEO, AEO, and AI workflows. Email: ${identity.email}, LinkedIn: ${identity.linkedin}, GitHub: ${identity.github}.`,
+    keywords: ["ayush", "contact", "email", "location", "hire", "linkedin", "github", "bio", "about", "who"],
+  },
+  {
+    id: "skills",
+    title: "Core Technical Stack & Engineering Skills",
+    url: `${identity.url}/#engineering`,
+    content: "Core stack includes TYPO3 (v11–v14), PHP 8.x, Vue, Nuxt, React, Next.js, TypeScript, Python, Node.js, Tailwind CSS, Firebase, Technical SEO, AEO, GEO, and automated AI data pipelines.",
+    keywords: ["skills", "stack", "technologies", "tech", "tools", "typo3", "vue", "nuxt", "react", "php", "python"],
+  },
+  {
+    id: "search-visibility",
+    title: "Search & AI Visibility (SEO, AEO, GEO)",
+    url: `${identity.url}/#search`,
+    content: "Engineers platforms for both traditional search engines (Google, Bing) and AI answer engines (Perplexity, ChatGPT, Claude). Implements JSON-LD schema graphs, semantic HTML, and curated llms.txt.",
+    keywords: ["seo", "aeo", "geo", "search", "schema", "llms", "visibility", "rankings", "google"],
+  },
+  ...projects.map((p) => ({
+    id: p.slug,
+    title: p.title,
+    url: `${identity.url}/work/${p.slug}/`,
+    content: `${p.title} (${p.subtitle}): ${p.description} Technologies: ${p.technologies.join(", ")}. Flow: ${p.flow.join(" → ")}. Challenge: ${p.challenge} Approach: ${p.approach} Result: ${p.result}`,
+    keywords: [p.slug, ...p.title.toLowerCase().split(" "), ...p.technologies.map((t) => t.toLowerCase())],
+  })),
+  {
+    id: "mascot-lab",
+    title: "Animated Mascot Lab (Strobi)",
+    url: `${identity.url}/lab/mascot/`,
+    content: "Strobi is a procedural SVG companion with 23 animated moods, 0 external runtime libraries, 100% vector SVG, and an integrated RAG chatbot powered by Cloudflare Workers AI.",
+    keywords: ["mascot", "strobi", "animation", "svg", "lab", "avatar", "moods", "character", "chatbot"],
+  },
+  ...faqs.map(([q, a], idx) => ({
+    id: `faq-${idx}`,
+    title: q,
+    url: `${identity.url}/#faq`,
+    content: `${q} Answer: ${a}`,
+    keywords: q.toLowerCase().split(" ").filter((w) => w.length > 3),
+  })),
+];
+
+await writeFile("dist/chatbot-corpus.json", JSON.stringify(ragChunks, null, 2));
+await writeFile("client/src/data/chatbot-knowledge.json", JSON.stringify(ragChunks, null, 2));
+
 console.log(
-  `Prerendered ${routes.length} pages with route metadata and structured data.`,
+  `Prerendered ${routes.length} pages, generated llms-full.txt and indexed ${ragChunks.length} RAG chunks.`,
 );

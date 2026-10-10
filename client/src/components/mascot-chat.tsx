@@ -22,68 +22,54 @@ const SUGGESTIONS = [
   "How can I contact Ayush?",
 ];
 
-// In-browser grounded knowledge fallback engine
-function generateLocalAnswer(query: string): string {
-  const q = query.toLowerCase();
+import chatbotKnowledge from "../data/chatbot-knowledge.json";
 
+interface RagChunk {
+  id: string;
+  title: string;
+  url: string;
+  content: string;
+  keywords: string[];
+}
+
+// In-browser grounded RAG retrieval engine
+function generateLocalAnswer(query: string): string {
+  const q = query.toLowerCase().trim();
+
+  // Fast direct matches for common questions
   if (q.includes("contact") || q.includes("hire") || q.includes("email") || q.includes("reach") || q.includes("touch")) {
     return `You can reach Ayush directly via email at **[${identity.email}](mailto:${identity.email})** or connect on **[LinkedIn](${identity.linkedin})**. He is based in ${identity.location} and available for web platform engineering and technical consultations.`;
-  }
-
-  if (q.includes("stack") || q.includes("skill") || q.includes("technology") || q.includes("technologies") || q.includes("tools")) {
-    return `Ayush specializes in **Web Platform Engineering** across:
-• **Backend & CMS**: TYPO3 (v11–v14), PHP 8.x, Python, Node.js, Firebase
-• **Frontend Architecture**: Vue, Nuxt, React, Next.js, TypeScript, Tailwind CSS
-• **Visibility & Automation**: Technical SEO, AEO (Answer Engine Optimization), GEO, Schema.org/JSON-LD, AI workflows and ETL data pipelines.`;
-  }
-
-  if (q.includes("autoputzer") || q.includes("der autoputzer")) {
-    const p = projects.find((x) => x.slug === "der-autoputzer");
-    return `**Der Autoputzer** is a large-scale modern platform rebuild combining **TYPO3** content architecture with a modern **Nuxt/Tailwind** frontend.
-• **Architecture**: Reusable TYPO3 Content Blocks mapped to reactive Nuxt components.
-• **Features**: Seminar booking, customer reviews, pricing grids, and search-optimized page architecture.
-• [View Case Study](/work/der-autoputzer/)`;
-  }
-
-  if (q.includes("bonafinca") || q.includes("real estate") || q.includes("property")) {
-    return `**Bonafinca Real Estate AI Email Assistant**:
-• Built an intelligent automated customer inquiry assistant that cut manual email handling by **60%**.
-• Uses automated contextual parsing of property inquiries to deliver accurate, immediate responses.
-• Combines AI automation with robust backend validation.`;
-  }
-
-  if (q.includes("nishika") || q.includes("fit with nishika") || q.includes("health")) {
-    const p = projects.find((x) => x.slug === "fit-with-nishika");
-    return `**Fit with Nishika** is a health and fitness platform:
-• Built with **Next.js**, **React**, **TypeScript**, and **Firebase Firestore / Auth**.
-• Features an interactive **Body Pattern Check** guide with direct PDF generation and Brevo email automation workflows.
-• [View Case Study](/work/fit-with-nishika/)`;
-  }
-
-  if (q.includes("mascot") || q.includes("strobi") || q.includes("character") || q.includes("animation")) {
-    return `That's me! I'm **Strobi**, Ayush's interactive procedural mascot!
-• Built with **100% vector SVG** and CSS keyframes — **zero external animation libraries** (< 4KB payload).
-• Features 23 moods, procedural blinking, sleeping states, and full accessibility with \`prefers-reduced-motion\`.
-• [Explore the Mascot Lab Guide](/lab/mascot/)`;
-  }
-
-  if (q.includes("typo3") || q.includes("cms") || q.includes("upgrade")) {
-    return `Ayush has 3+ years of deep **TYPO3** expertise (versions 11 through 14):
-• Large enterprise content modeling using Content Blocks and fluid extensions.
-• Handled migrations of **300k+ records** with clean data transformation pipelines.
-• Headless integrations connecting TYPO3 backends to modern Nuxt & Vue client frontends.`;
-  }
-
-  if (q.includes("seo") || q.includes("aeo") || q.includes("geo") || q.includes("search")) {
-    return `Ayush engineers search and AI discovery directly into platform architecture:
-• **Technical SEO**: Validated semantic HTML, fast Core Web Vitals, canonical routing.
-• **AEO & GEO**: Schema.org JSON-LD graphs (Person, TechArticle, HowTo, CreativeWork) and curated \`llms.txt\` so AI engines (Perplexity, ChatGPT, Claude) accurately cite platform content.`;
   }
 
   if (q.includes("who are you") || q.includes("who is ayush") || q.includes("about")) {
     return `I'm **Strobi**, the interactive companion for **Ayush Singh**.
 Ayush is a **Web Platform Engineer** based in Gujarat, India, focused on bridging complex CMS architectures (like TYPO3) with modern frontend frameworks (Nuxt, Vue, Next.js) and search/AI visibility.
 Ask me about his projects, skills, or how to get in touch!`;
+  }
+
+  const tokens = q.split(/\W+/).filter((t) => t.length > 2);
+  let bestChunk: RagChunk | null = null;
+  let highestScore = 0;
+
+  for (const chunk of chatbotKnowledge as RagChunk[]) {
+    let score = 0;
+    for (const kw of chunk.keywords) {
+      if (q.includes(kw.toLowerCase())) score += 4;
+    }
+    const titleLower = chunk.title.toLowerCase();
+    for (const token of tokens) {
+      if (titleLower.includes(token)) score += 5;
+      if (chunk.content.toLowerCase().includes(token)) score += 1;
+    }
+
+    if (score > highestScore) {
+      highestScore = score;
+      bestChunk = chunk;
+    }
+  }
+
+  if (bestChunk && highestScore >= 3) {
+    return `**${bestChunk.title}**\n\n${bestChunk.content}\n\n[View Details & Case Study](${bestChunk.url})`;
   }
 
   return `I only have information about Ayush Singh's web platform projects, technical skills (TYPO3, Nuxt, Vue, SEO/AI), and case studies.

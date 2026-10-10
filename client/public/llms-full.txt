@@ -1,0 +1,132 @@
+# Ayush Singh — Web Platform Engineering Knowledge Base
+
+## Professional Identity
+- Name: Ayush Singh
+- Role: Web Platform Engineer
+- Email: hello@ayush404.in
+- Location: Bhavnagar, Gujarat, India
+- Portfolio Website: https://ayush404.in
+- GitHub: https://github.com/70ayush-dev
+- LinkedIn: https://www.linkedin.com/in/ayush-singh-dev
+- Summary: Ayush Singh is a Web Platform Engineer specializing in TYPO3, PHP, Vue/Nuxt, Technical SEO, AEO, GEO, AI integrations, and web automation.
+
+## Core Technical Competencies
+- CMS & Backend: Deep TYPO3 expertise (v11–v14), PHP 8.x, Python, Node.js, Firebase Auth & Firestore, Laravel, WordPress.
+- Frontend Architecture: Vue 3, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, procedural SVG graphics.
+- Search & AI Visibility: Technical SEO, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization), Schema.org JSON-LD structured data, semantic HTML5, Core Web Vitals optimization.
+- AI Automation & Data: Real estate AI email assistant automation, ETL data transformation pipelines (300k+ records), RAG assistants.
+
+## Case Studies & Engineering Architecture
+### Der Autoputzer
+- Subtitle: Modern TYPO3 + Nuxt platform rebuild
+- URL: https://ayush404.in/work/der-autoputzer/
+- Live Demo: Client platform
+- Role: Lead Platform Engineer
+- Technologies: TYPO3, Nuxt, Vue, Tailwind, Content Blocks, SEO
+- Flow: TYPO3 → Content Blocks → API / Data → Nuxt → Tailwind UI
+- Challenge: Modernize the existing platform while keeping the CMS manageable for editors.
+- Approach: Create reusable TYPO3 content structures and map them to reusable Nuxt components across seminar pages, reviews, pricing and responsive layouts.
+- Results: A modern frontend architecture with reusable content components and a stronger foundation for future development.
+
+- Search Architecture: Reusable TYPO3 Content Blocks and Nuxt components connect structured content with the frontend. SEO is part of the project scope. This content model supports search-friendly page architecture; project-specific metadata, routing, performance, image optimization and AEO/GEO implementation details are not yet documented here.
+
+### Fit with Nishika
+- Subtitle: End-to-end practitioner website & content platform
+- URL: https://ayush404.in/work/fit-with-nishika/
+- Live Demo: https://fitwithnishika.com/
+- Role: End-to-end design and development — public website, admin CMS, backend APIs, integrations and search architecture.
+- Technologies: Next.js, React, TypeScript, Firebase, Brevo, React Bits, SEO
+- Flow: Next.js / React → Server APIs → Firebase Auth / Firestore → Admin CMS → Published content
+- Challenge: Create a coherent web presence for two distinct services: clinical physiotherapy through the clinic and personal training through a separate enquiry journey. Make educational resources easy to discover and give the practitioner tools to maintain the site.
+- Approach: Built the platform in Next.js, React and TypeScript, with responsive interfaces and React Bits interactions. Connected a custom admin CMS to Firebase Authentication and Firestore through server APIs. Implemented enquiry and guide workflows, content publishing and configurable email integration.
+- Results: Launched a complete public website with service-specific journeys, an educational resource library and a guided check-in, supported by a custom admin CMS and backend workflows. The case study documents delivered functionality; traffic, conversion and search-visibility improvements have not been measured here.
+- Key Decisions:
+  * Distinct service journeys: Separate clinical booking links from personal-training enquiries, with dedicated service pages and clear next steps.
+  * Custom content management: Authenticated admin editors manage resources, services, training offers, guide settings and media. Server-side content filtering and sanitization govern what reaches public pages.
+  * Educational check-in: Built a multi-step Body Pattern Check with a direct PDF download and optional email delivery. The guide is educational and shared, rather than presented as a diagnosis or personalized treatment plan.
+  * Backend & email workflows: Implemented server routes for enquiries, submissions and subscribers, with separate marketing consent and unsubscribe handling. Brevo integration supports email delivery and admin delivery statistics; actual sending depends on configuration.
+  * Interactive frontend: Built responsive service and resource interfaces with React Bits components, GSAP and motion effects, including an interactive practitioner badge.
+- Search Architecture: Implemented page-specific metadata, canonical URLs and social previews; JSON-LD for the practitioner, website, services, articles, breadcrumbs and visible FAQs; resource URLs and a dynamic XML sitemap; and robots directives. Consistent practitioner identity, author information, clear service relationships and question-based content give search and answer systems explicit context. These are implemented foundations for SEO, AEO and GEO, without claimed ranking or AI-citation gains.
+
+### TYPO3 AI Chatbot
+- Subtitle: RAG-powered AI assistant for TYPO3
+- URL: https://ayush404.in/work/typo3-ai-chatbot/
+- Live Demo: Client platform
+- Role: Lead Platform Engineer
+- Technologies: TYPO3, PHP, AI, RAG, LLM, Vector Search
+- Flow: TYPO3 Content → Content Indexing → Knowledge Base → Retrieval → LLM → AI Assistant
+- Challenge: Traditional website search often requires users to know exactly what they are looking for.
+- Approach: Connect TYPO3 content indexing and retrieval with an AI provider and a frontend chat interface, allowing questions in natural language.
+- Results: A retrieval-based approach to conversational access to CMS content.
+
+- Search Architecture: Structured schema.org graph and page metadata.
+
+### TYPO3 Migration Assistant
+- Subtitle: From legacy pages to structured content
+- URL: https://ayush404.in/work/migration-assistant/
+- Live Demo: Client platform
+- Role: Lead Platform Engineer
+- Technologies: TYPO3, AI, Automation, Content Mapping
+- Flow: Old Page URL → Page Scraping → Content Analysis → Layout Selection → Content Mapping → Preview → TYPO3 Page Creation
+- Challenge: Legacy page content needs to be understood and mapped into a new CMS structure.
+- Approach: Explore a workflow in which editors enter a URL, analyze the content, select a target layout, map content and preview a page before creation.
+- Results: An experiment in AI-assisted migration with editor review built into the proposed workflow.
+
+- Search Architecture: Structured schema.org graph and page metadata.
+
+### TYPO3 CRM System
+- Subtitle: Custom modules. Connected operations.
+- URL: https://ayush404.in/work/crm-system/
+- Live Demo: Client platform
+- Role: Lead Platform Engineer
+- Technologies: TYPO3 v14, PHP, Fluid, Database, Authentication, Custom Extension
+- Flow: Authentication → Custom Modules → Database → Dashboard
+- Challenge: Bring data management and user management together within a custom CRM platform.
+- Approach: Build around TYPO3 v14 with authentication, custom backend modules, Fluid and database-backed workflows.
+- Results: A TYPO3-based architecture for login, dashboards, data management and user management.
+
+- Search Architecture: Structured schema.org graph and page metadata.
+
+### TYPO3 Content Block System
+- Subtitle: One content model. Reusable interfaces.
+- URL: https://ayush404.in/work/content-block-system/
+- Live Demo: Client platform
+- Role: Lead Platform Engineer
+- Technologies: TYPO3, Content Blocks, Nuxt, Vue, API
+- Flow: TYPO3 Content Block → Structured Content → API / Data Layer → Nuxt Component → Responsive UI
+- Challenge: Give CMS editors manageable content structures while keeping frontend components reusable.
+- Approach: Define structured content in TYPO3 Content Blocks and map the data layer to Nuxt components.
+- Results: A shared content model connecting editor workflows with reusable responsive interfaces.
+
+- Search Architecture: Structured TYPO3 content is mapped through an API/data layer into reusable Nuxt components. This makes the relationship between CMS content and visible page structure explicit. AEO and GEO are architectural considerations, rather than documented visibility results for this project.
+
+
+## Lab Experiments
+### Animated Mascot Lab (Strobi)
+- URL: https://ayush404.in/lab/mascot/
+- Description: Procedural SVG character engine and 20-minute step-by-step implementation guide.
+- Technology: 100% vector SVG and native CSS keyframes (< 4KB payload, zero external runtime libraries, zero layout shift).
+- Features: 23 animated moods (idle, waking, happy, excited, curious, thinking, celebrate, drowsy, sleeping), natural periodic blinking, sleep timer, reduced-motion accessibility.
+- Companion AI: Grounded RAG chatbot connected to Cloudflare Workers AI with streaming responses.
+
+## Frequently Asked Questions (FAQs)
+### Q: Does Ayush provide SEO, AEO and GEO services?
+A: Yes. Ayush provides Search & AI Visibility Engineering as part of web platform development: technical and on-page SEO, structured content, AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization). He builds with these considerations from the architecture stage; rankings and inclusion in AI answers are not guaranteed.
+
+### Q: Who is Ayush Singh?
+A: Ayush Singh is a Web Platform Engineer based in India, working with teams globally. His work connects backend architecture with modern frontend experiences.
+
+### Q: What does Ayush build?
+A: Ayush builds modern, scalable, search-ready web platforms, CMS architectures, custom TYPO3 functionality, modern interfaces, AI-powered tools and automation workflows. SEO, AEO and GEO are considered alongside backend and frontend architecture.
+
+### Q: Which technologies does Ayush use?
+A: Ayush works with PHP, Python, Node.js, TYPO3, Laravel, WordPress, Joomla, Shopify and PrestaShop, alongside Vue, Nuxt, React, Next.js, TypeScript and Tailwind. His platform work also includes Firebase, REST APIs, SEO, AEO, GEO and AI integrations.
+
+### Q: What TYPO3 experience does Ayush have?
+A: His TYPO3 work spans v11 through v14, including custom extensions, Content Blocks, Fluid, Composer, upgrade wizards, backend modules, site packages, APIs and migrations.
+
+### Q: What projects has Ayush worked on?
+A: Selected work includes Fit with Nishika, an end-to-end Next.js and Firebase platform; Der Autoputzer; a TYPO3 AI Chatbot; a TYPO3 Migration Assistant experiment; a TYPO3 CRM System; and a reusable Content Block System.
+
+### Q: What AI work is Ayush exploring?
+A: Ayush is exploring RAG-based content retrieval, conversational CMS interfaces, AI-assisted migration, content workflows and developer automation.
