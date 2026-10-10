@@ -114,7 +114,7 @@ export function HeroSection() {
               asChild
             >
               <a
-                href="https://linkedin.com/in/ayush-singhdev"
+                href="https://www.linkedin.com/in/ayush-singh-dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="link-linkedin"

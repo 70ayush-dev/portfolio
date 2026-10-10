@@ -1,20 +1,14 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Linkedin, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Linkedin, ExternalLink } from "lucide-react";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "ayush8000342870@gmail.com",
-    href: "mailto:ayush8000342870@gmail.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+91-7016441774",
-    href: "tel:+917016441774",
+    value: "hello@ayush404.in",
+    href: "mailto:hello@ayush404.in",
   },
   {
     icon: MapPin,
@@ -28,7 +22,7 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "https://linkedin.com/in/ayush-singhdev",
+    href: "https://www.linkedin.com/in/ayush-singh-dev",
   },
 ];
 
@@ -104,7 +98,7 @@ export function ContactSection() {
               <Card className="p-8 h-full bg-card/80 backdrop-blur-sm border-border/50">
                 <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
                 <form
-                  action="https://formsubmit.co/70ayush@gmail.com"
+                  action="https://formsubmit.co/hello@ayush404.in"
                   method="POST"
                   className="space-y-4"
                 >

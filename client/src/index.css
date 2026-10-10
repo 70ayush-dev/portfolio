@@ -2017,6 +2017,18 @@ body,
   animation: mascot-sleep-breathing 4.8s ease-in-out infinite;
 }
 
+.mascot-mood-waking .mascot-body-group {
+  animation: mascot-waking 2.2s ease-in-out infinite;
+}
+
+.mascot-mood-happy .mascot-body-group {
+  animation: mascot-happy-sway 1.8s ease-in-out infinite;
+}
+
+.mascot-mood-thinking .mascot-body-group {
+  animation: mascot-thinking 2.6s ease-in-out infinite;
+}
+
 .mascot-blush {
   fill: var(--mascot-blush);
 }
@@ -2154,6 +2166,36 @@ body,
   to {
     transform: scale(1.2);
     opacity: 1;
+  }
+}
+
+@keyframes mascot-waking {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  45% {
+    transform: translateY(-5px) scale(0.96, 1.05);
+  }
+  75% {
+    transform: translateY(1px) scale(1.02, 0.98);
+  }
+}
+
+@keyframes mascot-happy-sway {
+  0%, 100% {
+    transform: translateY(0) rotate(-2.5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(2.5deg);
+  }
+}
+
+@keyframes mascot-thinking {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3.5deg) translateY(-3px);
   }
 }
 
@@ -2631,6 +2673,10 @@ body,
   .mascot-mood-celebrate .mascot-body-group,
   .mascot-mood-curious .mascot-body-group,
   .mascot-mood-sleeping .mascot-body-group,
+  .mascot-mood-drowsy .mascot-body-group,
+  .mascot-mood-waking .mascot-body-group,
+  .mascot-mood-happy .mascot-body-group,
+  .mascot-mood-thinking .mascot-body-group,
   .mascot-zzz text,
   .sparkle-dot {
     animation: none !important;

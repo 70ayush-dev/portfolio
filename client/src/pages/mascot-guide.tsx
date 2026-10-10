@@ -165,7 +165,8 @@ export default function MascotGuide() {
             <div className="sandbox-stage">
               <AnimatedMascot
                 interactive={false}
-                defaultMood={activeMood}
+                mood={activeMood}
+                onMoodChange={setActiveMood}
                 size={140}
                 showGuideBubble={false}
               />

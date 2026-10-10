@@ -29,32 +29,47 @@ const SECTION_TIPS: MascotTip[] = [
   { section: "contact", text: "Have a project or problem? Say hi to Ayush directly!" },
 ];
 
+export interface AnimatedMascotProps {
+  interactive?: boolean;
+  defaultMood?: MascotMood;
+  mood?: MascotMood;
+  onMoodChange?: (mood: MascotMood) => void;
+  size?: number;
+  showGuideBubble?: boolean;
+}
+
 export default function AnimatedMascot({
   interactive = true,
   defaultMood = "idle",
+  mood: controlledMood,
+  onMoodChange,
   size = 100,
   showGuideBubble = true,
-}: {
-  interactive?: boolean;
-  defaultMood?: MascotMood;
-  size?: number;
-  showGuideBubble?: boolean;
-}) {
-  const [mood, setMood] = useState<MascotMood>(defaultMood);
+}: AnimatedMascotProps) {
+  const [internalMood, setInternalMood] = useState<MascotMood>(controlledMood ?? defaultMood);
+  const mood = controlledMood !== undefined ? controlledMood : internalMood;
   const [bubbleText, setBubbleText] = useState<string>("Hi! I'm Strobi, Ayush's interactive companion.");
   const [bubbleOpen, setBubbleOpen] = useState(showGuideBubble);
   const [minimized, setMinimized] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
   const idleTimer = useRef<number | null>(null);
 
-  // Waking sequence on mount
+  // Sync internal mood when defaultMood changes if not controlled
   useEffect(() => {
-    setMood("waking");
+    if (controlledMood === undefined && defaultMood) {
+      setInternalMood(defaultMood);
+    }
+  }, [defaultMood, controlledMood]);
+
+  // Waking sequence on mount (only for interactive companion mode without explicit mood)
+  useEffect(() => {
+    if (!interactive || controlledMood !== undefined) return;
+    setInternalMood("waking");
     const wakeTimeout = window.setTimeout(() => {
-      setMood("idle");
+      setInternalMood("idle");
     }, 1800);
     return () => clearTimeout(wakeTimeout);
-  }, []);
+  }, [interactive, controlledMood]);
 
   // Natural periodic blinking
   useEffect(() => {
@@ -66,20 +81,20 @@ export default function AnimatedMascot({
     return () => clearInterval(interval);
   }, [mood]);
 
-  // Inactivity tracking (drowsy -> sleeping after 28 seconds of inactivity)
+  // Inactivity tracking (drowsy -> sleeping after 24 seconds of inactivity)
   useEffect(() => {
-    if (!interactive) return;
+    if (!interactive || controlledMood !== undefined) return;
 
     const resetIdle = () => {
       if (idleTimer.current) window.clearTimeout(idleTimer.current);
       if (mood === "sleeping" || mood === "drowsy") {
-        setMood("waking");
-        window.setTimeout(() => setMood("idle"), 1200);
+        setInternalMood("waking");
+        window.setTimeout(() => setInternalMood("idle"), 1200);
       }
       idleTimer.current = window.setTimeout(() => {
-        setMood("drowsy");
+        setInternalMood("drowsy");
         idleTimer.current = window.setTimeout(() => {
-          setMood("sleeping");
+          setInternalMood("sleeping");
           setBubbleText("Zzz... Wake me anytime!");
         }, 8000);
       }, 24000);
@@ -93,11 +108,11 @@ export default function AnimatedMascot({
       events.forEach((ev) => window.removeEventListener(ev, resetIdle));
       if (idleTimer.current) window.clearTimeout(idleTimer.current);
     };
-  }, [interactive, mood]);
+  }, [interactive, controlledMood, mood]);
 
   // Scroll section tracking to update speech bubble
   useEffect(() => {
-    if (!interactive) return;
+    if (!interactive || !showGuideBubble) return;
 
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 3;
@@ -116,17 +131,17 @@ export default function AnimatedMascot({
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [interactive]);
+  }, [interactive, showGuideBubble]);
 
   // Button hover reaction listener
   useEffect(() => {
-    if (!interactive) return;
+    if (!interactive || controlledMood !== undefined) return;
 
     const onButtonEnter = () => {
-      if (mood !== "sleeping") setMood("excited");
+      if (mood !== "sleeping") setInternalMood("excited");
     };
     const onButtonLeave = () => {
-      if (mood === "excited") setMood("idle");
+      if (mood === "excited") setInternalMood("idle");
     };
 
     const buttons = document.querySelectorAll("a.button, button.nav-cta, a.text-link");
@@ -141,20 +156,25 @@ export default function AnimatedMascot({
         btn.removeEventListener("mouseleave", onButtonLeave);
       });
     };
-  }, [interactive, mood]);
+  }, [interactive, controlledMood, mood]);
 
   // Interactive click cycle
   const handleMascotClick = () => {
     const cycle: MascotMood[] = ["happy", "excited", "celebrate", "curious", "idle"];
     const next = cycle[(cycle.indexOf(mood) + 1) % cycle.length] || "happy";
-    setMood(next);
-    setBubbleOpen(true);
+    if (onMoodChange) {
+      onMoodChange(next);
+    }
+    setInternalMood(next);
 
-    if (next === "happy") setBubbleText("Yay! Glad you're here exploring.");
-    if (next === "excited") setBubbleText("Building platforms is what we love!");
-    if (next === "celebrate") setBubbleText("23 moods, 100% SVG, and live code!");
-    if (next === "curious") setBubbleText("Have you visited the case studies yet?");
-    if (next === "idle") setBubbleText("I'm hanging around if you need tips!");
+    if (interactive) {
+      setBubbleOpen(true);
+      if (next === "happy") setBubbleText("Yay! Glad you're here exploring.");
+      if (next === "excited") setBubbleText("Building platforms is what we love!");
+      if (next === "celebrate") setBubbleText("23 moods, 100% SVG, and live code!");
+      if (next === "curious") setBubbleText("Have you visited the case studies yet?");
+      if (next === "idle") setBubbleText("I'm hanging around if you need tips!");
+    }
   };
 
   return (
@@ -260,6 +280,28 @@ export default function AnimatedMascot({
                     strokeWidth="3.5"
                     strokeLinecap="round"
                   />
+                ) : mood === "thinking" ? (
+                  <g className="mascot-eye-open left">
+                    <ellipse
+                      cx="52"
+                      cy="71"
+                      rx="5.5"
+                      ry={isBlinking ? 1 : 7.5}
+                      className="mascot-eye"
+                    />
+                    <circle cx="55" cy="68" r="2.2" className="mascot-pupil-highlight" />
+                  </g>
+                ) : mood === "waking" ? (
+                  <g className="mascot-eye-open left">
+                    <ellipse
+                      cx="52"
+                      cy="74"
+                      rx="5.5"
+                      ry={isBlinking ? 1 : 4.5}
+                      className="mascot-eye"
+                    />
+                    <circle cx="51" cy="73" r="1.8" className="mascot-pupil-highlight" />
+                  </g>
                 ) : (
                   <g className="mascot-eye-open left">
                     <ellipse
@@ -290,6 +332,28 @@ export default function AnimatedMascot({
                     strokeWidth="3.5"
                     strokeLinecap="round"
                   />
+                ) : mood === "thinking" ? (
+                  <g className="mascot-eye-open right">
+                    <ellipse
+                      cx="88"
+                      cy="71"
+                      rx="5.5"
+                      ry={isBlinking ? 1 : 7.5}
+                      className="mascot-eye"
+                    />
+                    <circle cx="91" cy="68" r="2.2" className="mascot-pupil-highlight" />
+                  </g>
+                ) : mood === "waking" ? (
+                  <g className="mascot-eye-open right">
+                    <ellipse
+                      cx="88"
+                      cy="74"
+                      rx="5.5"
+                      ry={isBlinking ? 1 : 4.5}
+                      className="mascot-eye"
+                    />
+                    <circle cx="87" cy="73" r="1.8" className="mascot-pupil-highlight" />
+                  </g>
                 ) : (
                   <g className="mascot-eye-open right">
                     <ellipse
@@ -317,34 +381,36 @@ export default function AnimatedMascot({
         </button>
 
         {/* Companion controls */}
-        <div className="mascot-controls" aria-label="Mascot options">
-          <button
-            type="button"
-            className="mascot-ctrl-btn"
-            onClick={() => setBubbleOpen(!bubbleOpen)}
-            title={bubbleOpen ? "Mute tips" : "Show tips"}
-            aria-label={bubbleOpen ? "Mute speech bubble" : "Show speech bubble"}
-          >
-            <MessageSquare size={13} />
-          </button>
-          <a
-            href="/lab/mascot/"
-            className="mascot-ctrl-btn guide-link"
-            title="Read Mascot Guide"
-            aria-label="Make your own mascot guide"
-          >
-            <Sparkles size={13} />
-          </a>
-          <button
-            type="button"
-            className="mascot-ctrl-btn"
-            onClick={() => setMinimized(!minimized)}
-            title="Minimize mascot"
-            aria-label="Minimize mascot"
-          >
-            <X size={13} />
-          </button>
-        </div>
+        {interactive && (
+          <div className="mascot-controls" aria-label="Mascot options">
+            <button
+              type="button"
+              className="mascot-ctrl-btn"
+              onClick={() => setBubbleOpen(!bubbleOpen)}
+              title={bubbleOpen ? "Mute tips" : "Show tips"}
+              aria-label={bubbleOpen ? "Mute speech bubble" : "Show speech bubble"}
+            >
+              <MessageSquare size={13} />
+            </button>
+            <a
+              href="/lab/mascot/"
+              className="mascot-ctrl-btn guide-link"
+              title="Read Mascot Guide"
+              aria-label="Make your own mascot guide"
+            >
+              <Sparkles size={13} />
+            </a>
+            <button
+              type="button"
+              className="mascot-ctrl-btn"
+              onClick={() => setMinimized(!minimized)}
+              title="Minimize mascot"
+              aria-label="Minimize mascot"
+            >
+              <X size={13} />
+            </button>
+          </div>
+        )}
       </div>
     </aside>
   );

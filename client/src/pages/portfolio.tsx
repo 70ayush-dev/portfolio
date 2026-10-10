@@ -355,12 +355,6 @@ export default function Portfolio() {
               <p className="contact-detail-line">
                 <span>Location:</span> {identity.location}
               </p>
-              <p className="contact-detail-line">
-                <span>Direct phone:</span>{" "}
-                <a href={`tel:${identity.phone.replace(/[^+\d]/g, "")}`}>
-                  {identity.phone}
-                </a>
-              </p>
             </div>
           </div>
           <div className="contact-actions">

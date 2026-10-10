@@ -7,8 +7,8 @@ export function Footer() {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/70ayush-dev", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/ayush-singhdev", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:ayush8000342870@gmail.com", label: "Email" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/ayush-singh-dev", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:hello@ayush404.in", label: "Email" },
   ];
 
   return (

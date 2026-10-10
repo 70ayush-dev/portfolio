@@ -2,11 +2,10 @@ export const identity = {
   name: "Ayush Singh",
   role: "Web Platform Engineer",
   url: "https://ayush404.in",
-  email: "ayush8000342870@gmail.com",
-  phone: "+91-7016441774",
+  email: "hello@ayush404.in",
   location: "Bhavnagar, Gujarat, India",
   github: "https://github.com/70ayush-dev",
-  linkedin: "https://linkedin.com/in/ayush-singhdev",
+  linkedin: "https://www.linkedin.com/in/ayush-singh-dev",
   resume: "/resume.pdf",
 };
 export interface Project {
