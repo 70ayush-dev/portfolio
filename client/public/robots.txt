@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /404.html
+Disallow: /api/
+Disallow: /*.json$
+
 Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 Sitemap: https://ayush404.in/sitemap.xml
